@@ -3,212 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ยุทธศาสตร์เศรษฐกิจไทย: 3% Plus (16:9 Slide)</title>
+    <title>ยุทธศาสตร์เศรษฐกิจไทย: 3% Plus</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Sarabun', sans-serif;
-            background-color: #0f172a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            overflow: hidden;
-        }
-        /* 16:9 Container */
-        .slide-container {
-            width: 100vw;
-            height: 56.25vw;
-            max-width: 1280px;
-            max-height: 720px;
-            background-color: #ffffff;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            display: flex;
-            flex-direction: column;
-            padding: 2.5rem;
-            border-radius: 0.75rem;
+            background-color: #f8fafc;
         }
         .policy-card {
-            transition: all 0.2s ease-in-out;
-            border-left-width: 4px;
+            transition: transform 0.2s ease-in-out, shadow 0.2s ease-in-out;
         }
         .policy-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
-        .bg-pattern {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 40%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0,100,255,0.03) 0%, rgba(255,255,255,0) 100%);
-            z-index: 0;
-            pointer-events: none;
-        }
     </style>
 </head>
-<body>
+<body class="p-4 md:p-8">
 
-    <div class="slide-container">
-        <div class="bg-pattern"></div>
+    <!-- Header Section -->
+    <header class="max-w-5xl mx-auto mb-10 text-center">
+        <div class="inline-block px-4 py-1 rounded-full text-white text-xs font-bold mb-4" style="background-color: #0064FF;">
+            POLICY INSIGHT 2025-2027
+        </div>
+        <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
+            ยุทธศาสตร์เศรษฐกิจไทย: <span style="color: #0064FF;">3% Plus</span>
+        </h1>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+            วิเคราะห์เจาะลึก "คุมคลังเบ็ดเสร็จ" ปลดล็อกคอขวดโครงสร้าง และกลไกการขับเคลื่อน GDP ผ่านความเชื่อมั่นและการลงทุน
+        </p>
+    </header>
 
-        <!-- Header -->
-        <header class="relative z-10 flex justify-between items-start mb-8">
-            <div class="text-left">
-                <div class="inline-block px-3 py-1 rounded-full text-white text-[10px] font-bold mb-3 uppercase tracking-widest" style="background-color: #0064FF;">
-                    Policy Vision
-                </div>
-                <h1 class="text-4xl font-black text-slate-900 leading-tight">
-                    ยุทธศาสตร์เศรษฐกิจไทย: <span style="color: #0064FF;">3% Plus</span>
-                </h1>
-                <p class="text-slate-500 text-sm mt-1">คุมคลังเบ็ดเสร็จ ปลดล็อกการลงทุน และยกระดับโครงสร้างเศรษฐกิจ</p>
-            </div>
-            
-            <div class="flex gap-6">
-                <div class="text-right">
-                    <span class="text-slate-400 text-[10px] font-bold uppercase block tracking-wider">Target Capex</span>
-                    <span class="text-2xl font-black" style="color: #0064FF;">1.1 ล้านล้านบาท</span>
-                </div>
-                <div class="text-right border-l pl-6 border-slate-200">
-                    <span class="text-slate-400 text-[10px] font-bold uppercase block tracking-wider">Fiscal Rule</span>
-                    <span class="text-2xl font-black" style="color: #EF3C67;">&lt; 70% GDP</span>
-                </div>
-            </div>
-        </header>
-
-        <!-- Body Grid -->
-        <main class="relative z-10 grid grid-cols-3 gap-6 flex-grow">
-            
-            <!-- Column 1: Governance & Friction -->
-            <div class="flex flex-col gap-4">
-                <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm policy-card flex-1" style="border-left-color: #7A0334;">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="p-2 rounded-lg" style="background-color: rgba(122, 3, 52, 0.1); color: #7A0334;">
-                            <i data-lucide="shield-check" size="20"></i>
-                        </div>
-                        <h3 class="font-bold text-base text-slate-800">Governance: คุมคลังเบ็ดเสร็จ</h3>
-                    </div>
-                    <ul class="text-slate-600 text-[13px] space-y-2">
-                        <li>• <strong>War-room Delivery:</strong> คุมคลังโดยไม่มี รมช. เพื่อลดแรงเสียดทานการเมือง</li>
-                        <li>• <strong>Agile System:</strong> ดึงเอกชน/นักวิชาการ ทลายคอขวดระบบราชการ</li>
-                        <li>• <strong>Quick Wins:</strong> เน้นมาตรการความถี่สูงสร้างความเชื่อมั่นตลาด</li>
-                    </ul>
-                </div>
-
-                <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm policy-card flex-1" style="border-left-color: #EF3C67;">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="p-2 rounded-lg" style="background-color: rgba(239, 60, 103, 0.1); color: #EF3C67;">
-                            <i data-lucide="settings" size="20"></i>
-                        </div>
-                        <h3 class="font-bold text-base text-slate-800">Structural Bottlenecks</h3>
-                    </div>
-                    <ul class="text-slate-600 text-[13px] space-y-2">
-                        <li>• <strong>Power:</strong> แก้ไขวิกฤตไฟฟ้าไม่พอสำหรับ Data Center</li>
-                        <li>• <strong>Permit:</strong> Digital Work Permit & Visa แก้ Permission Economy</li>
-                        <li>• <strong>Efficiency:</strong> ปรับปรุงระบบอนุญาต ลด Friction การทำธุรกิจ</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Column 2: 10 Plus Focus -->
-            <div class="flex flex-col">
-                <div class="bg-white p-5 rounded-2xl border-2 shadow-md flex-grow flex flex-col" style="border-color: #FF6600;">
-                    <div class="flex flex-col items-center mb-4 text-center">
-                        <div class="w-12 h-12 rounded-full flex items-center justify-center mb-2" style="background-color: rgba(255, 102, 0, 0.1);">
-                            <i data-lucide="zap" style="color: #FF6600;"></i>
-                        </div>
-                        <h3 class="font-bold text-xl text-slate-900">10 Plus: ปฏิรูปสองขา</h3>
-                    </div>
-
-                    <div class="space-y-4 flex-grow">
-                        <div class="bg-orange-50/50 p-3 rounded-xl border border-orange-100">
-                            <h4 class="text-[10px] font-black text-orange-600 uppercase mb-2 tracking-widest text-center">กระจายรายได้ (ฐานล่าง)</h4>
-                            <div class="grid grid-cols-1 gap-1.5 text-center text-[12px] font-semibold text-slate-700">
-                                <div>มนุษย์เงินเดือน & ผู้สูงวัย Plus</div>
-                                <div>SME Made in TH & เศรษฐกิจชุมชน</div>
-                                <div>Digital Learning Everywhere</div>
-                            </div>
-                        </div>
-
-                        <div class="bg-blue-50/50 p-3 rounded-xl border border-blue-100">
-                            <h4 class="text-[10px] font-black text-blue-600 uppercase mb-2 tracking-widest text-center">ขีดแข่งขัน (ศักยภาพ)</h4>
-                            <div class="grid grid-cols-1 gap-1.5 text-center text-[12px] font-semibold text-slate-700">
-                                <div>การลงทุน & Green Economy</div>
-                                <div>AI & Trade Plus</div>
-                                <div>Thailand Plus (กฎหมายธุรกิจ)</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-4 text-center">
-                        <span class="text-[10px] font-bold text-slate-400 italic">เป้าหมาย: ดันเศรษฐกิจโตเกิน 3% ยั่งยืน</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Column 3: Investment & Savings -->
-            <div class="flex flex-col gap-4">
-                <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm policy-card flex-1" style="border-left-color: #0064FF;">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="p-2 rounded-lg" style="background-color: rgba(0, 100, 255, 0.1); color: #0064FF;">
-                            <i data-lucide="trending-up" size="20"></i>
-                        </div>
-                        <h3 class="font-bold text-base text-slate-800">Investment & PPP</h3>
-                    </div>
-                    <ul class="text-slate-600 text-[13px] space-y-2">
-                        <li>• <strong>Execution Gap:</strong> เน้นเงินลงทุน "ลงดิน" (Capex) จริงในปีเดียว</li>
-                        <li>• <strong>New Funding:</strong> ใช้ TFF & PPP แทนงบรัฐปกติเพื่อลดหนี้</li>
-                        <li>• <strong>De-risking:</strong> รัฐจัดโครงสร้างให้เอกชนกล้าลงทุนมากขึ้น</li>
-                    </ul>
-                </div>
-
-                <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm policy-card flex-1" style="border-left-color: #9E50CC;">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="p-2 rounded-lg" style="background-color: rgba(158, 80, 204, 0.1); color: #9E50CC;">
-                            <i data-lucide="piggy-bank" size="20"></i>
-                        </div>
-                        <h3 class="font-bold text-base text-slate-800">Savings & Fiscal Discipline</h3>
-                    </div>
-                    <ul class="text-slate-600 text-[13px] space-y-2">
-                        <li>• <strong>TISA:</strong> ออมเพื่อเกษียณแทน LTF ลดหย่อนตัวคูณ</li>
-                        <li>• <strong>Section 28:</strong> ห้ามแบงก์รัฐแจกเงินเปล่า ต้องคุ้มค่า</li>
-                        <li>• <strong>Continuity:</strong> เร่งปฏิทินงบประมาณรักษาสภาพคล่อง</li>
-                    </ul>
-                </div>
-            </div>
-        </main>
-
-        <!-- Footer -->
-        <footer class="relative z-10 mt-8 pt-6 border-t border-slate-100 flex items-center justify-between">
-            <div class="flex gap-8">
-                <div class="flex items-center gap-2">
-                    <div class="w-2 h-2 rounded-full" style="background-color: #0064FF;"></div>
-                    <span class="text-[11px] font-bold text-slate-400 uppercase tracking-tight">Consumption:</span>
-                    <span class="text-[12px] text-slate-600 italic">"Multiplier สูงขึ้นด้วยทักษะดิจิทัล"</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <div class="w-2 h-2 rounded-full" style="background-color: #61D09C;"></div>
-                    <span class="text-[11px] font-bold text-slate-400 uppercase tracking-tight">Financing:</span>
-                    <span class="text-[12px] text-slate-600 italic">"De-risking ภาคเอกชนร่วมลงทุน"</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <div class="w-2 h-2 rounded-full" style="background-color: #FF6600;"></div>
-                    <span class="text-[11px] font-bold text-slate-400 uppercase tracking-tight">Success:</span>
-                    <span class="text-[12px] text-slate-600 italic">"ปลดล็อกข้อกฎหมายที่ขวางโอกาส"</span>
-                </div>
-            </div>
-            <div class="text-[10px] font-bold text-slate-300">
-                THAI ECONOMY STRATEGY 2025 | REF: THANSETTAKIJ, THAIRATH
-            </div>
-        </footer>
+    <!-- Hero Stats Grid -->
+    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center">
+            <span class="text-gray-400 text-xs font-bold uppercase mb-1">เป้าหมายระดมลงทุน</span>
+            <span class="text-3xl font-black" style="color: #0064FF;">1.1 ล้านล้าน</span>
+            <span class="text-gray-500 text-xs mt-1">เร่งเม็ดเงิน "ลงดิน" (Capex)</span>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center">
+            <span class="text-gray-400 text-xs font-bold uppercase mb-1">GDP North Star</span>
+            <span class="text-3xl font-black" style="color: #61D09C;">3% +</span>
+            <span class="text-gray-500 text-xs mt-1">ยกระดับจากค่ากลางที่ 2%</span>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center">
+            <span class="text-gray-400 text-xs font-bold uppercase mb-1">วินัยการคลัง</span>
+            <span class="text-3xl font-black" style="color: #EF3C67;">&lt; 70%</span>
+            <span class="text-gray-500 text-xs mt-1">Public Debt to GDP Ceiling</span>
+        </div>
     </div>
 
+    <!-- Main Content Grid -->
+    <main class="max-w-5xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
+            
+            <!-- Column 1: Governance & Macro -->
+            <div class="space-y-6">
+                <!-- Governance Card -->
+                <div class="bg-white rounded-xl shadow-sm border-l-4 p-5 policy-card" style="border-left-color: #7A0334;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="p-2 rounded-lg" style="background-color: rgba(122, 3, 52, 0.1); color: #7A0334;">
+                            <i data-lucide="shield-check"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-800">Governance: คุมคลังเบ็ดเสร็จ</h3>
+                            <p class="text-xs font-medium uppercase tracking-wider text-[#7A0334]">Delivery Model</p>
+                        </div>
+                    </div>
+                    <ul class="text-gray-600 text-sm space-y-2">
+                        <li>• <strong>War-room Strategy:</strong> รัฐมนตรีคุมเองโดยไม่มี รมช. เพื่อลดการเมืองแทรกแซง</li>
+                        <li>• <strong>Agile Bureaucracy:</strong> ดึงเอกชน/นักวิชาการทลายคอขวดระบบราชการ</li>
+                        <li>• <strong>Quick Big Wins:</strong> เน้นมาตรการสั้นสร้างความเชื่อมั่นพาเศรษฐกิจพ้นหล่ม</li>
+                    </ul>
+                </div>
+
+                <!-- Investment Card -->
+                <div class="bg-white rounded-xl shadow-sm border-l-4 p-5 policy-card" style="border-left-color: #0064FF;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="p-2 rounded-lg" style="background-color: rgba(0, 100, 255, 0.1); color: #0064FF;">
+                            <i data-lucide="trending-up"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-800">Investment-led Growth</h3>
+                            <p class="text-xs font-medium uppercase tracking-wider text-[#0064FF]">Execution Focus</p>
+                        </div>
+                    </div>
+                    <ul class="text-gray-600 text-sm space-y-2">
+                        <li>• <strong>From Approval to Action:</strong> ทำให้เงินลงทุน "ลงดิน" จริงในปีเดียว</li>
+                        <li>• <strong>Infrastructure Mix:</strong> ใช้ TFF และ PPP มากขึ้นเพื่อลดภาระงบประมาณ</li>
+                        <li>• <strong>Potential Growth:</strong> เน้นลงทุนที่ยกระดับขีดความสามารถระยะยาว</li>
+                    </ul>
+                </div>
+
+                <!-- Structural Card -->
+                <div class="bg-white rounded-xl shadow-sm border-l-4 p-5 policy-card" style="border-left-color: #EF3C67;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="p-2 rounded-lg" style="background-color: rgba(239, 60, 103, 0.1); color: #EF3C67;">
+                            <i data-lucide="settings"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-800">Structural Bottlenecks</h3>
+                            <p class="text-xs font-medium uppercase tracking-wider text-[#EF3C67]">Friction Reduction</p>
+                        </div>
+                    </div>
+                    <ul class="text-gray-600 text-sm space-y-2">
+                        <li>• <strong>Utility Crisis:</strong> แก้ปัญหาไฟฟ้าไม่พอสำหรับ Data Center</li>
+                        <li>• <strong>Permission Economy:</strong> ปรับวีซ่า/ใบอนุญาตผ่าน Digital Work Permit</li>
+                        <li>• <strong>Land & Labor:</strong> เคลียร์อุปสรรคเชิงระบบที่ขัดขวางการขยายฐานผลิต</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Column 2: Reform & Instruments -->
+            <div class="space-y-6 mt-6 lg:mt-0">
+                <!-- 10 Plus Special Section -->
+                <div class="bg-white rounded-xl shadow-sm border-t-4 p-5" style="border-top-color: #FF6600;">
+                    <div class="flex items-center gap-2 mb-4">
+                        <i data-lucide="zap" style="color: #FF6600;"></i>
+                        <h3 class="font-bold text-lg">10 Plus: ยา 10 เม็ดปฏิรูป</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 mb-2">
+                        <div class="space-y-2">
+                            <h4 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">5 เม็ด: กระจายรายได้</h4>
+                            <div class="bg-orange-50 p-2 rounded text-xs border border-orange-100 font-semibold text-gray-700">1. มนุษย์เงินเดือน Plus</div>
+                            <div class="bg-orange-50 p-2 rounded text-xs border border-orange-100 font-semibold text-gray-700">2. ผู้สูงวัย Plus</div>
+                            <div class="bg-orange-50 p-2 rounded text-xs border border-orange-100 font-semibold text-gray-700">3. SME Made in TH</div>
+                            <div class="bg-orange-50 p-2 rounded text-xs border border-orange-100 font-semibold text-gray-700">4. เศรษฐกิจชุมชน</div>
+                            <div class="bg-orange-50 p-2 rounded text-xs border border-orange-100 font-semibold text-gray-700">5. การศึกษาออนไลน์</div>
+                        </div>
+                        <div class="space-y-2">
+                            <h4 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">5 เม็ด: ขีดแข่งขัน</h4>
+                            <div class="bg-blue-50 p-2 rounded text-xs border border-blue-100 font-semibold text-gray-700">6. การลงทุนใหญ่</div>
+                            <div class="bg-blue-50 p-2 rounded text-xs border border-blue-100 font-semibold text-gray-700">7. Green Economy</div>
+                            <div class="bg-blue-50 p-2 rounded text-xs border border-blue-100 font-semibold text-gray-700">8. AI Transformation</div>
+                            <div class="bg-blue-50 p-2 rounded text-xs border border-blue-100 font-semibold text-gray-700">9. Trade Plus</div>
+                            <div class="bg-blue-50 p-2 rounded text-xs border border-blue-100 font-semibold text-gray-700">10. กฎหมาย TH Plus</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Capital Market Card -->
+                <div class="bg-white rounded-xl shadow-sm border-l-4 p-5 policy-card" style="border-left-color: #9E50CC;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="p-2 rounded-lg" style="background-color: rgba(158, 80, 204, 0.1); color: #9E50CC;">
+                            <i data-lucide="piggy-bank"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-800">Capital Market & TISA</h3>
+                            <p class="text-xs font-medium uppercase tracking-wider text-[#9E50CC]">Long-term Savings</p>
+                        </div>
+                    </div>
+                    <ul class="text-gray-600 text-sm space-y-2">
+                        <li>• <strong>TISA replaces LTF:</strong> ออมเพื่อเกษียณ ปรับพอร์ตตามความเสี่ยง</li>
+                        <li>• <strong>Tax Multiplier:</strong> ลดหย่อนภาษีแบบตัวคูณ จูงใจรายได้ปานกลาง</li>
+                        <li>• <strong>Domestic Pool:</strong> เสริมสภาพคล่องและฐานทุนในประเทศ</li>
+                    </ul>
+                </div>
+
+                <!-- Fiscal Rules Card -->
+                <div class="bg-white rounded-xl shadow-sm border-l-4 p-5 policy-card" style="border-left-color: #EF3C67;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="p-2 rounded-lg" style="background-color: rgba(239, 60, 103, 0.1); color: #EF3C67;">
+                            <i data-lucide="landmark"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-800">Fiscal Rules & Guardrails</h3>
+                            <p class="text-xs font-medium uppercase tracking-wider text-[#EF3C67]">Stability First</p>
+                        </div>
+                    </div>
+                    <ul class="text-gray-600 text-sm space-y-2">
+                        <li>• <strong>Section 28 Reform:</strong> ห้ามแบงก์รัฐแจกเงินเปล่า ต้องประเมินความคุ้มค่า</li>
+                        <li>• <strong>Debt Ceiling:</strong> คงเพดานหนี้ 70% เพื่อรักษาความน่าเชื่อถือ</li>
+                        <li>• <strong>Budget Timing:</strong> ตั้งรัฐบาลเร็วเพื่อรักษางบปี 70 ไม่ให้สะดุด</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Footer Panel -->
+        <div class="mt-8 p-6 rounded-2xl bg-slate-900 text-white relative overflow-hidden">
+            <div class="relative z-10">
+                <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    <i data-lucide="info" class="text-blue-400"></i>
+                    สรุปทิศทางนโยบาย (Policy Paradigm Shift)
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="border-l-2 border-blue-500 pl-4">
+                        <span class="text-blue-400 text-xs font-bold block mb-1 uppercase">Consumption</span>
+                        <p class="text-sm text-slate-300 italic">"ไม่ใช่แค่แจกเงิน แต่เพิ่มทักษะดิจิทัลให้ร้านค้าเพื่อ multiplier ที่สูงขึ้น"</p>
+                    </div>
+                    <div class="border-l-2 border-green-500 pl-4">
+                        <span class="text-green-400 text-xs font-bold block mb-1 uppercase">Financing</span>
+                        <p class="text-sm text-slate-300 italic">"ลดภาระงบปกติ หันไปใช้ TFF และดึงเอกชนร่วมลงทุน (PPP) มากขึ้น"</p>
+                    </div>
+                    <div class="border-l-2 border-orange-500 pl-4">
+                        <span class="text-orange-400 text-xs font-bold block mb-1 uppercase">Success Factor</span>
+                        <p class="text-sm text-slate-300 italic">"3% Plus จะเป็นไปได้จริงเมื่อแก้ Permission Economy ได้สำเร็จ"</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Decorative blur background -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-blue-600 rounded-full blur-[100px] opacity-20 -mr-32 -mt-32"></div>
+        </div>
+    </main>
+
+    <footer class="max-w-5xl mx-auto mt-10 pb-10 text-center text-gray-400 text-xs">
+        อ้างอิงข้อมูล: ฐานเศรษฐกิจ, ไทยรัฐ และประชาชาติธุรกิจ (ผ่านระบบสืบค้น) | จัดทำโดยระบบ AI สรุปนโยบายเศรษฐกิจไทย
+    </footer>
+
     <script>
+        // Initialize Lucide Icons
         lucide.createIcons();
     </script>
 </body>
