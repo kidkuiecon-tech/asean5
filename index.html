@@ -1,395 +1,678 @@
-import React from 'react';
-import { 
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell 
-} from 'recharts';
-import { 
-  TrendingUp, 
-  Globe, 
-  Wallet, 
-  Activity, 
-  Info, 
-  PieChart, 
-  Vote, 
-  Cpu, 
-  Briefcase,
-  FileText,
-  Search
-} from 'lucide-react';
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASEAN Monthly Review - February 2026</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f8fafc;
+        }
+        .chart-container {
+            position: relative;
+            height: 350px;
+            width: 100%;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="text-slate-900 antialiased pb-20">
 
-const App = () => {
-  // ข้อมูล GDP ประจำไตรมาส 4 ปี 2025 และการคาดการณ์ปี 2026 ตามตารางที่ระบุ
-  const gdpData = [
-    { name: 'อินโดนีเซีย', q4: 5.39, annual: 5.11, forecast: 5.10, color: '#0064FF' },
-    { name: 'มาเลเซีย', q4: 6.30, annual: 5.20, forecast: 4.30, color: '#9E50CC' },
-    { name: 'ฟิลิปปินส์', q4: 3.00, annual: 4.40, forecast: 5.60, color: '#EF3C67' },
-    { name: 'สิงคโปร์', q4: 6.90, annual: 5.00, forecast: 1.80, color: '#61D09C' },
-    { name: 'เวียดนาม', q4: 8.46, annual: 8.02, forecast: 5.60, color: '#059669' },
-    { name: 'ไทย', q4: 2.50, annual: 2.40, forecast: 1.60, color: '#FF6600' },
-  ];
-
-  return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 p-4 md:p-8 font-sans">
-      <div className="max-w-6xl mx-auto space-y-10">
+    <div class="max-w-6xl mx-auto px-4 md:px-8 pt-10 space-y-12">
         
-        {/* หัวข้อรายงาน */}
-        <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b-2 pb-6 border-blue-700">
-          <div>
-            <h1 className="text-4xl font-extrabold text-blue-800 flex items-center gap-3 tracking-tight">
-              <Globe className="w-10 h-10" />
-              ASEAN Monthly Review
-            </h1>
-            <p className="text-slate-500 font-bold mt-1 uppercase tracking-wider">Economic Analysis & Strategic Outlook • February 2026</p>
-          </div>
-          <div className="bg-blue-50 px-6 py-2 rounded-lg border border-blue-100 text-right">
-            <div className="text-sm font-bold text-blue-700 uppercase">Report Status</div>
-            <div className="text-lg font-black text-blue-900">กุมภาพันธ์ 2569</div>
-          </div>
+        <!-- Header -->
+        <header class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b-2 pb-8 border-blue-700">
+            <div>
+                <div class="flex items-center gap-3 text-blue-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                    </svg>
+                    <h1 class="text-4xl font-extrabold tracking-tight uppercase">ASEAN Monthly Review</h1>
+                </div>
+                <p class="text-slate-500 font-bold mt-2 uppercase tracking-widest text-sm">Economic Analysis & Strategic Outlook • February 2026</p>
+            </div>
+            <div class="bg-blue-50 px-6 py-3 rounded-xl border border-blue-100 text-right shadow-sm">
+                <div class="text-xs font-bold text-blue-700 uppercase mb-1">Report Status</div>
+                <div class="text-xl font-black text-blue-900">กุมภาพันธ์ 2569</div>
+            </div>
         </header>
 
-        {/* บทสรุปผู้บริหาร */}
-        <section className="bg-white rounded-2xl p-8 border-l-8 border-blue-600 shadow-sm space-y-4">
-          <h2 className="text-xl font-bold flex items-center gap-2 text-blue-800 uppercase">
-            <Info className="w-5 h-5" /> Executive Summary
-          </h2>
-          <div className="text-lg md:text-xl text-slate-700 leading-relaxed font-medium">
-            GDP ของอาเซียนในไตรมาส 4 ปี 2025 รวมสะท้อนให้เห็นถึง 
-            <span className="text-blue-700 font-bold"> “ความแตกต่างของแรงขับเคลื่อน” </span> 
-            ระหว่างประเทศที่พึ่งพาการบริโภคภายใน กับประเทศที่ได้อานิสงส์จากวัฏจักรเทคโนโลยีและการค้าโลก
-          </div>
-        </section>
-
-        {/* รายละเอียด GDP รายประเทศ */}
-        <section className="space-y-6">
-          <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-2 border-b pb-2">
-            <Activity className="w-6 h-6 text-red-600" /> รายละเอียดภาวะเศรษฐกิจรายประเทศ
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              { title: "1) อินโดนีเซีย", content: "เศรษฐกิจไตรมาส 4/2025 ขยายตัว 5.39% YoY เร่งขึ้นจาก 5.04% ในไตรมาส 3 สูงสุดนับตั้งแต่ 3Q2022 แรงหนุนหลักจากการบริโภคภาคเอกชน (5.11%) ตามมาตรการภาครัฐและการลดดอกเบี้ย แม้การส่งออกจะชะลอตัวลง ปี 2025 โต 5.11% (สูงขึ้นจาก 5.03%)" },
-              { title: "2) มาเลเซีย", content: "ขยายตัว 6.3% YoY เร่งตัวสูงสุดนับตั้งแต่ปลายปี 2022 เติบโตเป็นวงกว้างทั้งเกษตร (น้ำมันปาล์ม) ผลิต และบริการ การบริโภคครัวเรือนและการลงทุนขยายตัวต่อเนื่อง แม้ดุลการค้าจะถูกกดดันจากการนำเข้าที่เร่งขึ้น ปี 2025 โต 5.2%" },
-              { title: "3) ฟิลิปปินส์", content: "ขยายตัวเพียง 3.0% YoY ชะลอลงและต่ำกว่าคาด กดดันจากภาครัฐที่ใช้จ่ายลดลงและการลงทุนหดตัวครั้งแรกในรอบกว่าปี แต่ได้ภาคส่งออกช่วยพยุงภาพรวม ทั้งปี 2025 โต 4.4% ชะลอจาก 5.6% ในปี 2024" },
-              { title: "4) สิงคโปร์", content: "ขยายตัว 6.9% YoY สูงสุดตั้งแต่ปี 2021 ได้อานิสงส์หลักจากภาคผลิตอิเล็กทรอนิกส์ที่เกี่ยวกับ AI รวมถึงค้าส่งและการเงิน ทั้งปี 2025 โต 5.0% ชะลอเล็กน้อยจาก 5.3% ในปีก่อนหน้า" },
-              { title: "5) เวียดนาม", content: "ขยายตัวโดดเด่นถึง 8.46% YoY สูงสุดตั้งแต่ปี 2007 เติบโตแข็งแกร่งทุกส่วน โดยเฉพาะอุตสาหกรรม/ก่อสร้าง (9.73%) การส่งออก/นำเข้าพุ่งกว่า 19% แม้เผชิญกำแพงภาษี ทั้งปี 2025 โต 8.02% สูงสุดตั้งแต่ปี 2011" },
-              { title: "6) ประเทศไทย", content: "ขยายตัว 2.5% YoY ฟื้นตัวจากจุดต่ำสุดในรอบ 4 ปี แรงหนุนจากการบริโภคเอกชน (3.3%) และการลงทุนที่ฟื้นชัดเจน (8.1%) แต่ยังตามหลังเพื่อนบ้าน ทั้งปี 2025 โต 2.4% ปี 2026 คาดการณ์กรอบ 1.5% - 2.5%" }
-            ].map((item, idx) => (
-              <div key={idx} className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:border-blue-300 transition-all">
-                <h3 className="font-bold text-lg text-blue-700 mb-2">{item.title}</h3>
-                <p className="text-sm text-slate-600 leading-relaxed">{item.content}</p>
-              </div>
-            ))}
-          </div>
-          <div className="bg-slate-100 p-4 rounded-lg text-sm text-slate-700 italic border-l-4 border-slate-400">
-            สรุปภาพรวมรายปี 2025: เวียดนาม (8.02%) นำโด่ง ตามด้วยมาเลเซีย (5.2%), อินโดนีเซีย (5.11%), สิงคโปร์ (5.0%), ฟิลิปปินส์ (4.4%) และไทย (2.4%)
-          </div>
-        </section>
-
-        {/* กราฟและตาราง GDP */}
-        <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-          <div className="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-            <h3 className="text-lg font-bold mb-6 flex items-center gap-2 text-slate-800 uppercase tracking-tight">
-              <PieChart className="w-5 h-5 text-blue-600" /> 
-              ASEAN GDP Visualization (% YoY)
-            </h3>
-            <div className="h-80 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={gdpData} margin={{ top: 10, right: 30, left: 0, bottom: 20 }}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#475569', fontSize: 12}} dy={10} />
-                  <YAxis axisLine={false} tickLine={false} tick={{fill: '#475569', fontSize: 12}} />
-                  <Tooltip 
-                    cursor={{fill: '#f8fafc'}} 
-                    contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
-                  />
-                  <Bar dataKey="q4" name="4Q2025 (%)" radius={[4, 4, 0, 0]} barSize={45}>
-                    {gdpData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
+        <!-- Executive Summary -->
+        <section class="bg-white rounded-2xl p-8 border-l-8 border-blue-600 shadow-md transform transition hover:scale-[1.01]">
+            <h2 class="text-sm font-black text-blue-800 uppercase flex items-center gap-2 mb-4 tracking-tighter">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                </svg>
+                Executive Summary
+            </h2>
+            <div class="text-xl md:text-2xl text-slate-700 leading-relaxed font-semibold">
+                GDP ของอาเซียนในไตรมาส 4 ปี 2025 รวมสะท้อนให้เห็นถึง 
+                <span class="text-blue-700 border-b-4 border-blue-100">“ความแตกต่างของแรงขับเคลื่อน”</span> 
+                ระหว่างประเทศที่พึ่งพาการบริโภคภายใน กับประเทศที่ได้อานิสงส์จากวัฏจักรเทคโนโลยีและการค้าโลก
             </div>
-          </div>
-
-          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-            <div className="bg-blue-700 text-white p-4 font-bold text-center uppercase tracking-widest text-sm">
-              GDP Data Table
-            </div>
-            <table className="w-full text-sm border-collapse">
-              <thead className="bg-slate-50 text-[10px] text-slate-500 font-black uppercase">
-                <tr>
-                  <th className="p-3 text-left border-b">ประเทศ</th>
-                  <th className="p-3 text-center border-b">4Q25</th>
-                  <th className="p-3 text-center border-b">2025</th>
-                  <th className="p-3 text-center border-b">2026(f)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {gdpData.map((row, idx) => (
-                  <tr key={idx} className="hover:bg-slate-50 border-b border-slate-100 transition-colors">
-                    <td className="p-3 font-bold text-slate-700">{row.name}</td>
-                    <td className="p-3 text-center text-blue-600 font-bold">{row.q4.toFixed(2)}%</td>
-                    <td className="p-3 text-center text-slate-600">{row.annual.toFixed(2)}%</td>
-                    <td className="p-3 text-center text-slate-400 italic">{row.forecast.toFixed(2)}%</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div className="p-3 text-[10px] text-slate-400 italic bg-slate-50">ที่มา: Bloomberg</div>
-          </div>
         </section>
 
-        {/* นโยบายการเงิน */}
-        <section className="space-y-6">
-          <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-2 border-b pb-2">
-            <Wallet className="w-6 h-6 text-indigo-600" /> ทิศทางนโยบายการเงิน
-          </h2>
-          <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-            <p className="mb-6 text-slate-600 leading-relaxed font-medium">
-              สะท้อนภาพ <span className="text-indigo-700 font-bold">“จังหวะที่แตกต่างกัน”</span> ระหว่างประเทศที่เข้าสู่วัฏจักรผ่อนคลายชัดเจน กับประเทศที่เลือกคงดอกเบี้ยเพื่อประเมินสถานการณ์และเสถียรภาพค่าเงิน
-            </p>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="space-y-4">
-                {[
-                  { bank: "อินโดนีเซีย (BI)", rate: "4.75%", desc: "คงดอกเบี้ยต่อเนื่องครั้งที่ 5 เพื่อรักษาเสถียรภาพรูเปียห์ท่ามกลางความผันผวนโลก" },
-                  { bank: "ฟิลิปปินส์ (BSP)", rate: "4.25%", desc: "ผ่อนคลายเชิงรุก ลดดอกเบี้ย 25 bps เพื่อพยุงเศรษฐกิจที่ชะลอตัวเหลือราว 3%" },
-                  { bank: "มาเลเซีย (BNM)", rate: "2.75%", desc: "คงดอกเบี้ยเป็นครั้งที่ 3 จากเงินเฟ้อต่ำและเศรษฐกิจขยายตัวได้ดี" }
-                ].map((item, i) => (
-                  <div key={i} className="flex justify-between items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100">
-                    <div className="flex-1">
-                      <div className="font-bold text-slate-800 underline decoration-indigo-200 decoration-4 underline-offset-2">{item.bank}</div>
-                      <div className="text-xs text-slate-500 mt-1">{item.desc}</div>
+        <!-- GDP Detailed Analysis -->
+        <section class="space-y-8">
+            <h2 class="text-2xl font-extrabold text-slate-800 flex items-center gap-3 border-b pb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+                รายละเอียดภาวะเศรษฐกิจรายประเทศ
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Indonesia -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-blue-400 transition-all">
+                    <h3 class="font-bold text-lg text-blue-700 mb-3 flex justify-between">
+                        <span>1) อินโดนีเซีย</span>
+                        <span class="text-xs bg-blue-100 px-2 py-1 rounded">5.39%</span>
+                    </h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">เศรษฐกิจไตรมาส 4/2025 เร่งขึ้นจาก 5.04% ในไตรมาส 3 สูงสุดนับตั้งแต่ 3Q2022 แรงหนุนหลักจากการบริโภคภาคเอกชน (5.11%) ตามมาตรการภาครัฐและการลดดอกเบี้ย แม้การส่งออกจะชะลอตัวลง ปี 2025 โต 5.11% (สูงขึ้นจาก 5.03% ในปี 2024)</p>
+                </div>
+                <!-- Malaysia -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-purple-400 transition-all">
+                    <h3 class="font-bold text-lg text-purple-700 mb-3 flex justify-between">
+                        <span>2) มาเลเซีย</span>
+                        <span class="text-xs bg-purple-100 px-2 py-1 rounded">6.30%</span>
+                    </h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">เร่งตัวสูงสุดนับตั้งแต่ปลายปี 2022 เติบโตเป็นวงกว้างทั้งเกษตร (น้ำมันปาล์ม) ผลิต และบริการ การบริโภคครัวเรือนและการลงทุนขยายตัวต่อเนื่อง แม้ดุลการค้าจะถูกกดดันจากการนำเข้าที่เร่งขึ้น ปี 2025 โต 5.2% (สูงกว่าปีก่อนหน้าที่ 5.1%)</p>
+                </div>
+                <!-- Philippines -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-red-400 transition-all">
+                    <h3 class="font-bold text-lg text-red-700 mb-3 flex justify-between">
+                        <span>3) ฟิลิปปินส์</span>
+                        <span class="text-xs bg-red-100 px-2 py-1 rounded">3.00%</span>
+                    </h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">ขยายตัวเพียง 3.0% YoY ชะลอลงและต่ำกว่าคาด กดดันจากภาครัฐที่ใช้จ่ายลดลงและการลงทุนหดตัวครั้งแรกในรอบกว่าปี แต่ได้ภาคส่งออกช่วยพยุงภาพรวม ทั้งปี 2025 โต 4.4% ชะลอลงจาก 5.6% ในปี 2024</p>
+                </div>
+                <!-- Singapore -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-emerald-400 transition-all">
+                    <h3 class="font-bold text-lg text-emerald-700 mb-3 flex justify-between">
+                        <span>4) สิงคโปร์</span>
+                        <span class="text-xs bg-emerald-100 px-2 py-1 rounded">6.90%</span>
+                    </h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">ขยายตัวเร่งขึ้นจาก 4.6% ในไตรมาสก่อน สูงสุดตั้งแต่ปี 2021 ได้อานิสงส์หลักจากภาคผลิตอิเล็กทรอนิกส์ที่เกี่ยวกับ AI รวมถึงค้าส่งและการเงิน ทั้งปี 2025 โต 5.0% ชะลอเล็กน้อยจาก 5.3% ในปี 2024</p>
+                </div>
+                <!-- Vietnam -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-green-600 transition-all">
+                    <h3 class="font-bold text-lg text-green-700 mb-3 flex justify-between">
+                        <span>5) เวียดนาม</span>
+                        <span class="text-xs bg-green-100 px-2 py-1 rounded">8.46%</span>
+                    </h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">ขยายตัวโดดเด่นสูงสุดตั้งแต่ปี 2007 เติบโตแข็งแกร่งทุกส่วน โดยเฉพาะอุตสาหกรรม/ก่อสร้าง (9.73%) การส่งออก/นำเข้าพุ่งกว่า 19% แม้เผชิญภาษีสหรัฐฯ ปี 2025 โต 8.02% สูงสุดตั้งแต่ปี 2011</p>
+                </div>
+                <!-- Thailand -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 hover:border-orange-400 transition-all">
+                    <h3 class="font-bold text-lg text-orange-700 mb-3 flex justify-between">
+                        <span>6) ประเทศไทย</span>
+                        <span class="text-xs bg-orange-100 px-2 py-1 rounded">2.50%</span>
+                    </h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">ฟื้นตัวจากจุดต่ำสุดในรอบ 4 ปี แรงหนุนจากบริโภคเอกชน (3.3%) และการลงทุนที่ฟื้นชัดเจน (8.1%) ภาคอุตสาหกรรมและบริการกลับมาดีขึ้น ทั้งปี 2025 โต 2.4% ปี 2026 คาดการณ์กรอบ 1.5% - 2.5%</p>
+                </div>
+            </div>
+            
+            <div class="bg-slate-100 p-5 rounded-2xl text-sm text-slate-700 border-l-4 border-slate-400 font-medium">
+                สรุปภาพรวมรายปี 2025: เวียดนาม (8.02%) นำโด่ง ตามด้วยมาเลเซีย (5.2%), อินโดนีเซีย (5.11%), สิงคโปร์ (5.0%), ฟิลิปปินส์ (4.4%) และไทย (2.4%) สะท้อนกลุ่มเทคโนโลยีโตโดดเด่นกว่ากลุ่มบริโภคภายใน
+            </div>
+        </section>
+
+        <!-- GDP Chart and Table Section -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <!-- Chart -->
+            <div class="lg:col-span-8 bg-white p-8 rounded-3xl shadow-sm border border-slate-200">
+                <h3 class="text-lg font-black mb-8 flex items-center gap-3 text-slate-800 uppercase tracking-tight">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                    ASEAN GDP Visualization (% YoY)
+                </h3>
+                <div class="chart-container">
+                    <canvas id="gdpChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="lg:col-span-4 bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="bg-blue-800 text-white p-5 font-extrabold text-center uppercase tracking-widest text-xs">
+                    ASEAN GDP DATA TABLE
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm border-collapse">
+                        <thead class="bg-slate-50 text-[10px] text-slate-500 font-black uppercase border-b">
+                            <tr>
+                                <th class="p-4 text-left">ประเทศ</th>
+                                <th class="p-4 text-center">4Q25</th>
+                                <th class="p-4 text-center">2025</th>
+                                <th class="p-4 text-center">2026(f)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-4 font-bold text-slate-700">อินโดนีเซีย</td>
+                                <td class="p-4 text-center text-blue-600 font-bold">5.39%</td>
+                                <td class="p-4 text-center text-slate-600">5.11%</td>
+                                <td class="p-4 text-center text-slate-400 italic font-medium">5.10%</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-4 font-bold text-slate-700">มาเลเซีย</td>
+                                <td class="p-4 text-center text-blue-600 font-bold">6.30%</td>
+                                <td class="p-4 text-center text-slate-600">5.20%</td>
+                                <td class="p-4 text-center text-slate-400 italic font-medium">4.30%</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-4 font-bold text-slate-700">ฟิลิปปินส์</td>
+                                <td class="p-4 text-center text-blue-600 font-bold">3.00%</td>
+                                <td class="p-4 text-center text-slate-600">4.40%</td>
+                                <td class="p-4 text-center text-slate-400 italic font-medium">5.60%</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-4 font-bold text-slate-700">สิงคโปร์</td>
+                                <td class="p-4 text-center text-blue-600 font-bold">6.90%</td>
+                                <td class="p-4 text-center text-slate-600">5.00%</td>
+                                <td class="p-4 text-center text-slate-400 italic font-medium">1.80%</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors bg-green-50/30">
+                                <td class="p-4 font-bold text-slate-700">เวียดนาม</td>
+                                <td class="p-4 text-center text-green-700 font-black">8.46%</td>
+                                <td class="p-4 text-center text-slate-600 font-bold">8.02%</td>
+                                <td class="p-4 text-center text-slate-400 italic font-medium">5.60%</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition-colors">
+                                <td class="p-4 font-bold text-slate-700">ไทย</td>
+                                <td class="p-4 text-center text-orange-600 font-bold">2.50%</td>
+                                <td class="p-4 text-center text-slate-600">2.40%</td>
+                                <td class="p-4 text-center text-slate-400 italic font-medium">1.60%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-4 text-[10px] text-slate-400 italic bg-slate-50 border-t flex justify-between">
+                    <span>ที่มา: Bloomberg</span>
+                    <span>f = forecast</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Monetary Policy -->
+        <section class="space-y-8">
+            <h2 class="text-2xl font-extrabold text-slate-800 flex items-center gap-3 border-b pb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                ทิศทางนโยบายการเงิน (Interest Rate)
+            </h2>
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200">
+                <p class="mb-8 text-slate-600 leading-relaxed font-semibold">
+                    ภาพรวมสะท้อน <span class="text-indigo-700 font-black tracking-tight underline decoration-indigo-200 underline-offset-4 decoration-4">“จังหวะที่แตกต่างกัน”</span> ระหว่างประเทศที่เข้าสู่วัฏจักรผ่อนคลายชัดเจน กับประเทศที่เลือกคงดอกเบี้ยเพื่อประเมินสถานการณ์
+                </p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    <div class="space-y-4">
+                        <!-- BI -->
+                        <div class="flex justify-between items-start gap-6 p-5 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-sm transition-all">
+                            <div class="flex-1">
+                                <div class="font-bold text-slate-800 border-b w-fit border-indigo-200 pb-1 mb-2">อินโดนีเซีย (BI)</div>
+                                <div class="text-xs text-slate-500 leading-relaxed font-medium">คงอัตราดอกเบี้ย 4.75% ติดต่อกันครั้งที่ 5 เพื่อรักษาเสถียรภาพรูเปียห์และคุมเงินเฟ้อตามเป้าหมาย</div>
+                            </div>
+                            <div class="text-2xl font-black text-indigo-700">4.75%</div>
+                        </div>
+                        <!-- BSP -->
+                        <div class="flex justify-between items-start gap-6 p-5 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-sm transition-all">
+                            <div class="flex-1">
+                                <div class="font-bold text-slate-800 border-b w-fit border-red-200 pb-1 mb-2 text-red-700 uppercase">ฟิลิปปินส์ (BSP)</div>
+                                <div class="text-xs text-slate-500 leading-relaxed font-medium">ผ่อนคลายเชิงรุก ลดดอกเบี้ย 25 bps สู่ 4.25% เพื่อพยุงเศรษฐกิจที่ชะลอลงสู่ระดับ 3%</div>
+                            </div>
+                            <div class="text-2xl font-black text-red-600">4.25%</div>
+                        </div>
+                        <!-- BNM -->
+                        <div class="flex justify-between items-start gap-6 p-5 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-sm transition-all">
+                            <div class="flex-1">
+                                <div class="font-bold text-slate-800 border-b w-fit border-indigo-200 pb-1 mb-2">มาเลเซีย (BNM)</div>
+                                <div class="text-xs text-slate-500 leading-relaxed font-medium">คงอัตราดอกเบี้ย 2.75% เนื่องจากเงินเฟ้อต่ำและเศรษฐกิจขยายตัวได้ตามเป้าหมาย</div>
+                            </div>
+                            <div class="text-2xl font-black text-indigo-700">2.75%</div>
+                        </div>
                     </div>
-                    <div className="text-lg font-black text-indigo-700 whitespace-nowrap">{item.rate}</div>
-                  </div>
-                ))}
-              </div>
-              <div className="space-y-4">
-                {[
-                  { bank: "ประเทศไทย (ธปท.)", rate: "1.25%", desc: "คงดอกเบี้ยต่อเนื่อง รอดูข้อมูลเพิ่มเติม ท่าทีเป็นกลางค่อนไปทางผ่อนคลาย" },
-                  { bank: "เวียดนาม (SBV)", rate: "4.50%", desc: "คงอัตราดอกเบี้ยระดับผ่อนคลายเพื่อสนับสนุนการเติบโตและดูแลค่าเงิน" }
-                ].map((item, i) => (
-                  <div key={i} className="flex justify-between items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100">
-                    <div className="flex-1">
-                      <div className="font-bold text-slate-800 underline decoration-indigo-200 decoration-4 underline-offset-2">{item.bank}</div>
-                      <div className="text-xs text-slate-500 mt-1">{item.desc}</div>
+                    <div class="space-y-4">
+                        <!-- BOT -->
+                        <div class="flex justify-between items-start gap-6 p-5 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-sm transition-all">
+                            <div class="flex-1">
+                                <div class="font-bold text-slate-800 border-b w-fit border-indigo-200 pb-1 mb-2">ไทย (ธปท.)</div>
+                                <div class="text-xs text-slate-500 leading-relaxed font-medium">คงดอกเบี้ยที่ 1.25% เน้นเสถียรภาพระบบการเงิน ท่าทีเป็นกลางค่อนไปทางผ่อนคลาย</div>
+                            </div>
+                            <div class="text-2xl font-black text-indigo-700">1.25%</div>
+                        </div>
+                        <!-- SBV -->
+                        <div class="flex justify-between items-start gap-6 p-5 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-sm transition-all">
+                            <div class="flex-1">
+                                <div class="font-bold text-slate-800 border-b w-fit border-indigo-200 pb-1 mb-2">เวียดนาม (SBV)</div>
+                                <div class="text-xs text-slate-500 leading-relaxed font-medium">คงดอกเบี้ย 4.50% ระดับผ่อนคลายเพื่อสนับสนุนการส่งออกและการลงทุน</div>
+                            </div>
+                            <div class="text-2xl font-black text-indigo-700">4.50%</div>
+                        </div>
+                        <div class="p-6 rounded-2xl bg-indigo-900 text-white shadow-lg">
+                            <h4 class="font-black uppercase text-xs mb-2 tracking-widest opacity-70">Outlook Summary</h4>
+                            <p class="text-sm font-medium leading-relaxed">
+                                เปิดปี 2026 อาเซียนแบ่งเป็นกลุ่มผ่อนคลายชัดเจน (ฟิลิปปินส์) และกลุ่มคงดอกเบี้ยเพื่อประเมินสถานการณ์ (อินโดฯ, ไทย, มาเลฯ, เวียดนาม) ทิศทางจะขึ้นอยู่กับโมเมนตัมเศรษฐกิจโลกเป็นหลัก
+                            </p>
+                        </div>
                     </div>
-                    <div className="text-lg font-black text-indigo-700 whitespace-nowrap">{item.rate}</div>
-                  </div>
-                ))}
-                <div className="p-4 rounded-xl bg-indigo-900 text-white text-sm font-medium">
-                  ทิศทางครึ่งปีแรกจะขึ้นกับ: โมเมนตัมการเติบโต, เสถียรภาพค่าเงิน และพัฒนาการเงินเฟ้อของแต่ละประเทศ
                 </div>
-              </div>
             </div>
-          </div>
         </section>
 
-        {/* เครื่องชี้เศรษฐกิจรายเดือน */}
-        <section className="space-y-6">
-          <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-2 border-b pb-2">
-            <Search className="w-6 h-6 text-blue-600" /> เครื่องชี้เศรษฐกิจรายเดือน (Key Indicators)
-          </h2>
-          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden overflow-x-auto">
-            <table className="w-full text-left border-collapse min-w-[800px]">
-              <thead className="bg-blue-800 text-white uppercase text-xs font-bold tracking-widest">
-                <tr>
-                  <th className="p-5 border-r border-blue-700 w-48">ประเทศ</th>
-                  <th className="p-5">เครื่องชี้วัดที่สำคัญ</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-200">
-                {[
-                  {
-                    country: "อินโดนีเซีย",
-                    data: [
-                      "Manufacturing PMI: 52.6 (ขยายตัวเดือนที่ 6 จากอุปสงค์ในประเทศ)",
-                      "ยอดขายรถจักรยานยนต์: 577,763 คัน (+25.08% MoM) หนุนโดยดอกเบี้ยขาลง",
-                      "เงินเฟ้อ: +3.55% YoY (Core 2.45%) หมวดที่อยู่อาศัยพุ่งจากฐานค่าไฟต่ำ",
-                      "ดัชนีเชื่อมั่นผู้บริโภค: 127.0 สูงสุดตั้งแต่ ม.ค. 2025"
-                    ]
-                  },
-                  {
-                    country: "มาเลเซีย",
-                    data: [
-                      "Manufacturing PMI: 50.2 สูงสุดตั้งแต่ พ.ค. 2024 จาก Output ฟื้นตัว",
-                      "ยอดขายรถ: 64,298 คัน (EV 7,687 คัน) ชะลอลงหลังจากฐานสูงเดือนก่อน",
-                      "เงินเฟ้อ: +1.6% YoY (Core 2.3%) ทรงตัวในระดับต่ำ"
-                    ]
-                  },
-                  {
-                    country: "ฟิลิปปินส์",
-                    data: [
-                      "Manufacturing PMI: 52.9 สูงสุดตั้งแต่ เม.ย. 2025 คำสั่งซื้อใหม่ฟื้นชัดเจน",
-                      "ยอดขายรถ (ธ.ค.): 8,009 คัน เพิ่มขึ้นต่อเนื่องสะท้อนอุปสงค์แกร่ง",
-                      "เงินเฟ้อ: +2.0% YoY (Core 2.8% สูงสุดรอบ 7 เดือน) จากหมวดสาธารณูปโภค"
-                    ]
-                  },
-                  {
-                    country: "ประเทศไทย",
-                    data: [
-                      "Manufacturing PMI: 52.7 ชะลอจากจุดสูงสุดเดิมเนื่องจากส่งออกอ่อนแรง",
-                      "การผลิตรถ: 113,855 คัน / ยอดขายในประเทศ +39.07% YoY (แรงหนุน EV 3.0)",
-                      "เงินเฟ้อ: -0.66% YoY ติดลบต่อเนื่องเดือนที่ 10 จากราคาพลังงาน",
-                      "ดัชนีเชื่อมั่นธุรกิจ: 49.1 ต่ำสุดตั้งแต่ ต.ค. / ความเชื่อมั่นผู้บริโภค: 52.8 ฟื้นจากส่งออกและรัฐบาลใหม่"
-                    ]
-                  },
-                  {
-                    country: "เวียดนาม",
-                    data: [
-                      "Manufacturing PMI: 52.5 ขยายตัวเดือนที่ 7 / มุมมอง 12 เดือนข้างหน้าดีสุดรอบปี",
-                      "การผลิตภาคอุตสาหกรรม: +21.5% YoY เร่งตัวแรงจากปัจจัยฤดูกาลก่อนตรุษญวน",
-                      "ยอดค้าปลีก: +9.3% YoY / เงินเฟ้อ: +2.53% YoY ต่ำสุดนับตั้งแต่ ก.ค. 2023"
-                    ]
-                  }
-                ].map((row, idx) => (
-                  <tr key={idx} className="hover:bg-blue-50/30 transition-colors group">
-                    <td className="p-6 font-bold text-blue-800 align-top border-r border-slate-100 group-hover:bg-blue-50">{row.country}</td>
-                    <td className="p-6">
-                      <ul className="space-y-2">
-                        {row.data.map((item, i) => (
-                          <li key={i} className="flex gap-2 text-sm text-slate-600">
-                            <span className="text-blue-500 font-bold">•</span> {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+        <!-- Key Monthly Indicators Table -->
+        <section class="space-y-8">
+            <h2 class="text-2xl font-extrabold text-slate-800 flex items-center gap-3 border-b pb-4 uppercase tracking-tight">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+                เครื่องชี้เศรษฐกิจรายเดือน (Key Indicators)
+            </h2>
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden overflow-x-auto custom-scrollbar">
+                <table class="w-full text-left border-collapse min-w-[800px]">
+                    <thead class="bg-blue-800 text-white uppercase text-[10px] font-black tracking-widest">
+                        <tr>
+                            <th class="p-6 border-r border-blue-700 w-48">ประเทศ</th>
+                            <th class="p-6">เครื่องชี้วัดเชิงลึก</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <!-- ID -->
+                        <tr class="hover:bg-blue-50/20 transition-colors">
+                            <td class="p-6 font-black text-blue-800 align-top border-r border-slate-50 bg-slate-50/30">อินโดนีเซีย</td>
+                            <td class="p-6">
+                                <ul class="space-y-3">
+                                    <li class="flex gap-3 text-sm text-slate-600">
+                                        <span class="text-blue-500 font-black">•</span>
+                                        <span><strong>Manufacturing PMI:</strong> อยู่ที่ 52.6 (prev. 51.2) ขยายตัวเดือนที่ 6 จากอุปสงค์ในประเทศ</span>
+                                    </li>
+                                    <li class="flex gap-3 text-sm text-slate-600">
+                                        <span class="text-blue-500 font-black">•</span>
+                                        <span><strong>ยอดขายรถจักรยานยนต์:</strong> 577,763 คัน (+25.08% MoM) หนุนโดยดอกเบี้ยลดสะสม 150 bps</span>
+                                    </li>
+                                    <li class="flex gap-3 text-sm text-slate-600">
+                                        <span class="text-blue-500 font-black">•</span>
+                                        <span><strong>อัตราเงินเฟ้อ:</strong> +3.55% YoY (Core 2.45%) หมวดที่อยู่อาศัยพุ่งจากฐานค่าไฟต่ำ</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <!-- MY -->
+                        <tr class="hover:bg-blue-50/20 transition-colors">
+                            <td class="p-6 font-black text-blue-800 align-top border-r border-slate-50 bg-slate-50/30">มาเลเซีย</td>
+                            <td class="p-6">
+                                <ul class="space-y-3">
+                                    <li class="flex gap-3 text-sm text-slate-600">
+                                        <span class="text-blue-500 font-black">•</span>
+                                        <span><strong>Manufacturing PMI:</strong> 50.2 ขยายตัวเดือนที่ 3 คำสั่งซื้อส่งออกกลับมาเพิ่มและต้นทุนลดลง</span>
+                                    </li>
+                                    <li class="flex gap-3 text-sm text-slate-600">
+                                        <span class="text-blue-500 font-black">•</span>
+                                        <span><strong>ยอดขายรถรวม:</strong> 64,298 คัน (จดทะเบียน EV 7,687 คัน) ชะลอลงจากฐานสูงในเดือน ธ.ค.</span>
+                                    </li>
+                                    <li class="flex gap-3 text-sm text-slate-600">
+                                        <span class="text-blue-500 font-black">•</span>
+                                        <span><strong>อัตราเงินเฟ้อ:</strong> +1.6% YoY (Core 2.3%) ทรงตัวในระดับต่ำ</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <!-- PH -->
+                        <tr class="hover:bg-blue-50/20 transition-colors">
+                            <td class="p-6 font-black text-blue-800 align-top border-r border-slate-50 bg-slate-50/30">ฟิลิปปินส์</td>
+                            <td class="p-6">
+                                <ul class="space-y-3">
+                                    <li class="flex gap-3 text-sm text-slate-600">
+                                        <span class="text-blue-500 font-black">•</span>
+                                        <span><strong>Manufacturing PMI:</strong> 52.9 สูงสุดรอบ 10 เดือน คำสั่งซื้อใหม่ฟื้นแรง หนุนการจ้างงาน</span>
+                                    </li>
+                                    <li class="flex gap-3 text-sm text-slate-600">
+                                        <span class="text-blue-500 font-black">•</span>
+                                        <span><strong>อัตราเงินเฟ้อ:</strong> Core 2.8% (เทียบ prev. 2.4%) สูงสุดตั้งแต่กลางปี 2024 จากหมวดสาธารณูปโภค</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <!-- TH -->
+                        <tr class="hover:bg-blue-50/20 transition-colors">
+                            <td class="p-6 font-black text-blue-800 align-top border-r border-slate-50 bg-slate-50/30">ประเทศไทย</td>
+                            <td class="p-6">
+                                <ul class="space-y-3">
+                                    <li class="flex gap-3 text-sm text-slate-600">
+                                        <span class="text-blue-500 font-black">•</span>
+                                        <span><strong>Manufacturing PMI:</strong> 52.7 ชะลอจากจุดสูงสุด 2.5 ปี (57.4) เนื่องจากส่งออกอ่อนแรง</span>
+                                    </li>
+                                    <li class="flex gap-3 text-sm text-slate-600">
+                                        <span class="text-blue-500 font-black">•</span>
+                                        <span><strong>ยอดขายรถในประเทศ:</strong> +39.07% YoY (สะสม EV 3.0 เร่งผลิต) ขณะที่ยอดผลิตรวม 1.13 แสนคัน</span>
+                                    </li>
+                                    <li class="flex gap-3 text-sm text-slate-600">
+                                        <span class="text-red-500 font-black">•</span>
+                                        <span><strong>อัตราเงินเฟ้อ:</strong> -0.66% YoY ติดลบต่อเนื่องเดือนที่ 10 (Core อยู่ที่ +0.60%)</span>
+                                    </li>
+                                    <li class="flex gap-3 text-sm text-slate-600">
+                                        <span class="text-blue-500 font-black">•</span>
+                                        <span><strong>ดัชนีเชื่อมั่นผู้บริโภค:</strong> 52.8 ฟื้นตัวจากแรงหนุนส่งออก (+16.8%) และเสถียรภาพรัฐบาลใหม่</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <!-- VN -->
+                        <tr class="hover:bg-blue-50/20 transition-colors">
+                            <td class="p-6 font-black text-blue-800 align-top border-r border-slate-50 bg-slate-50/30">เวียดนาม</td>
+                            <td class="p-6">
+                                <ul class="space-y-3">
+                                    <li class="flex gap-3 text-sm text-slate-600">
+                                        <span class="text-blue-500 font-black">•</span>
+                                        <span><strong>การผลิตอุตสาหกรรม:</strong> +21.5% YoY (Manufacturing +23.6%) เร่งตัวแรงก่อนตรุษญวน</span>
+                                    </li>
+                                    <li class="flex gap-3 text-sm text-slate-600">
+                                        <span class="text-blue-500 font-black">•</span>
+                                        <span><strong>ยอดค้าปลีก:</strong> +9.3% YoY ชะลอลงเล็กน้อย แต่หมวดค้าสินค้ายังเร่งตัวดี</span>
+                                    </li>
+                                    <li class="flex gap-3 text-sm text-slate-600">
+                                        <span class="text-blue-500 font-black">•</span>
+                                        <span><strong>อัตราเงินเฟ้อ:</strong> +2.53% YoY ต่ำสุดตั้งแต่ ก.ค. 2023 จากราคาอาหารที่ลดลง</span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
 
-        {/* ข่าวเด่นรายประเทศ */}
-        <section className="space-y-6 pb-20">
-          <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-2 border-b pb-2">
-            <FileText className="w-6 h-6 text-slate-600" /> ความเคลื่อนไหวรายประเทศที่น่าสนใจ
-          </h2>
-          
-          <div className="space-y-8">
-            {/* อินโดนีเซีย */}
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-3xl">🇮🇩</span>
-                <h3 className="text-xl font-bold text-blue-700 uppercase">Indonesia Economic Outlook 2026</h3>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="md:col-span-2 space-y-4">
-                  <p className="text-sm text-slate-600 leading-relaxed italic">
-                    ประธานาธิบดี Prabowo ตั้งเป้า GDP โตใกล้ 6% โดยกระทรวงการคลังกำหนดเป้าไตรมาส 1/2026 ไว้ที่ 5.5%–6.0% แรงสนับสนุนหลักมาจากนโยบายการคลังเชิงขยายตัว
-                  </p>
-                  <div className="font-bold text-slate-800 text-sm">4 เสาหลักการขับเคลื่อน:</div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {[
-                      { t: "1) อาหารกลางวันฟรี", c: "ขยายจำนวนผู้รับสิทธิและงบประมาณ" },
-                      { t: "2) สหกรณ์หมู่บ้าน", c: "สร้างกว่า 30,000 แห่ง ยกระดับเกษตร" },
-                      { t: "3) Danantara Fund", c: "ลงทุน Downstream $26,000 ล้าน" },
-                      { t: "4) ความมั่นคงอาหาร", c: "ผลผลิตข้าวปรับตัวเพิ่มขึ้นนัยสำคัญ" }
-                    ].map((pill, i) => (
-                      <div key={i} className="p-3 bg-blue-50 rounded-lg text-xs">
-                        <div className="font-bold text-blue-700 mb-1">{pill.t}</div>
-                        <div className="text-slate-500">{pill.c}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div className="bg-slate-50 p-6 rounded-xl border border-slate-100 flex flex-col justify-center">
-                  <div className="text-[10px] uppercase font-bold text-slate-400 mb-2">Market Insight</div>
-                  <p className="text-xs text-slate-500 leading-relaxed">
-                    ความสำเร็จของการปฏิรูปโครงสร้างจะเป็นปัจจัยสำคัญต่อการฟื้นความเชื่อมั่น ท่ามกลางความเป็นไปได้ที่จะถูกปรับลดอันดับหุ้นจาก MSCI และความน่าเชื่อถือพันธบัตรจาก Moody's
-                  </p>
-                </div>
-              </div>
-            </div>
+        <!-- National Highlights -->
+        <section class="space-y-10 pb-20">
+            <h2 class="text-2xl font-extrabold text-slate-800 flex items-center gap-3 border-b pb-4 uppercase">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l4 4v10a2 2 0 01-2 2z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 2v4a2 2 0 002 2h4" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 13H8" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 17H8" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9H8" />
+                </svg>
+                ความเคลื่อนไหวรายประเทศที่น่าสนใจ
+            </h2>
 
-            {/* มาเลเซีย */}
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-3xl">🇲🇾</span>
-                <h3 className="text-xl font-bold text-purple-700 uppercase">Malaysia: Accelerating Growth, Advancing Malaysia</h3>
-              </div>
-              <p className="text-sm text-slate-600 leading-relaxed mb-6">
-                นายกฯ Anwar Ibrahim เน้นย้ำยุทธศาสตร์ "Execution over Announcement" ภายใต้แผนพัฒนาเศรษฐกิจฉบับที่ 13 (13MP) ยึดหลักธรรมาภิบาลและ Zero Tolerance for Corruption
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {[
-                  { icon: <Cpu className="w-5 h-5"/>, h: "AI Nation 2030", d: "ยกระดับเซมิคอนดักเตอร์และเศรษฐกิจดิจิทัล" },
-                  { icon: <TrendingUp className="w-5 h-5"/>, h: "Net-zero 2050", d: "เร่งโรดแมปพลังงานหมุนเวียน" },
-                  { icon: <Activity className="w-5 h-5"/>, h: "Healthcare RESET", d: "ปฏิรูประบบสาธารณสุขผ่าน National Health Fund" },
-                  { icon: <Briefcase className="w-5 h-5"/>, h: "Fiscal Reform", d: "สร้างพื้นที่ทางการคลังและรักษาเสถียรภาพราคา" }
-                ].map((item, i) => (
-                  <div key={i} className="p-4 bg-purple-50 rounded-xl border border-purple-100">
-                    <div className="text-purple-600 mb-2">{item.icon}</div>
-                    <div className="font-bold text-slate-800 text-sm mb-1">{item.h}</div>
-                    <div className="text-[11px] text-slate-500">{item.d}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* ประเทศไทย */}
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-3xl">🇹🇭</span>
-                <h3 className="text-xl font-bold text-orange-700 uppercase">Thailand Election Report: 8 ก.พ. 2569</h3>
-              </div>
-              <div className="flex flex-col lg:flex-row gap-8">
-                <div className="flex-1 space-y-4">
-                  <p className="text-sm text-slate-600 leading-relaxed font-medium">
-                    พรรคภูมิใจไทยเป็นแกนนำจัดตั้งรัฐบาลร่วมกับพรรคเพื่อไทย โดยมีเป้าหมายจัดตั้งรัฐบาลให้เสร็จสิ้นภายใน มี.ค.-เม.ย. เพื่อไม่ให้กระทบงบประมาณ
-                  </p>
-                  <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                    <div className="text-xs font-bold text-slate-400 uppercase mb-3">สรุปจำนวนที่นั่งในสภา (500 ที่นั่ง)</div>
-                    <div className="flex items-end gap-2 h-20">
-                      <div className="flex-1 bg-blue-600 rounded-t-lg relative" style={{height: '90%'}}>
-                        <span className="absolute -top-6 left-0 right-0 text-center font-bold text-blue-800 text-xs">ภท. 193</span>
-                      </div>
-                      <div className="flex-1 bg-orange-500 rounded-t-lg relative" style={{height: '60%'}}>
-                        <span className="absolute -top-6 left-0 right-0 text-center font-bold text-orange-700 text-xs">ปชน. 118</span>
-                      </div>
-                      <div className="flex-1 bg-red-500 rounded-t-lg relative" style={{height: '40%'}}>
-                        <span className="absolute -top-6 left-0 right-0 text-center font-bold text-red-700 text-xs">พท. 74</span>
-                      </div>
-                      <div className="flex-1 bg-slate-400 rounded-t-lg relative" style={{height: '30%'}}>
-                        <span className="absolute -top-6 left-0 right-0 text-center font-bold text-slate-700 text-xs">กธ. 58</span>
-                      </div>
+            <!-- Indonesia Detailed -->
+            <div class="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-sm border border-slate-200 overflow-hidden relative">
+                <div class="flex items-center gap-4 mb-8">
+                    <span class="text-4xl">🇮🇩</span>
+                    <div>
+                        <h3 class="text-2xl font-black text-blue-800">Indonesia Economic Outlook 2026</h3>
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Strategic Policy Framework</p>
                     </div>
-                  </div>
                 </div>
-                <div className="lg:w-1/3 bg-orange-50 p-6 rounded-2xl border border-orange-100 space-y-4">
-                  <div className="flex items-center gap-2">
-                    <Vote className="text-orange-600 w-5 h-5" />
-                    <h4 className="font-bold text-slate-800 text-sm uppercase italic">Economic Agenda</h4>
-                  </div>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    ว่าที่ รมว.คลัง (นายเอกนิติ) เน้นยุทธศาสตร์:
-                  </p>
-                  <ul className="text-[11px] space-y-2 text-slate-700 font-bold">
-                    <li>• รักษาวินัยการคลังและบริหารหนี้สาธารณะอย่างรอบคอบ</li>
-                    <li>• ลงทุนโครงสร้างพื้นฐานที่มีผลคูณเศรษฐกิจสูง</li>
-                    <li>• ปฏิรูปภาษีเพื่อขยายฐานรายได้รัฐ</li>
-                    <li>• ส่งเสริมอุตสาหกรรมเป้าหมายและเศรษฐกิจดิจิทัล</li>
-                  </ul>
-                  <div className="text-[10px] text-orange-700 font-black text-center pt-2 border-t border-orange-200 uppercase">
-                    Execution Target: 1H 2026
-                  </div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                    <div class="lg:col-span-2 space-y-6">
+                        <p class="text-sm text-slate-600 leading-relaxed font-medium">
+                            ประธานาธิบดี Prabowo ตั้งเป้า GDP โตใกล้ 6% โดยกำหนดเป้าไตรมาส 1/2026 ไว้ที่ 5.5%–6.0% แรงสนับสนุนหลักมาจากนโยบายการคลังเชิงขยายตัวและการเบิกจ่ายงบต้นปี
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="p-5 bg-blue-50 rounded-2xl border border-blue-100 group hover:bg-blue-600 hover:text-white transition-all cursor-default">
+                                <div class="font-black text-blue-800 group-hover:text-white mb-1 text-sm">1) อาหารกลางวันฟรี</div>
+                                <div class="text-[11px] opacity-80 leading-snug font-medium">เพิ่มงบประมาณและขยายจำนวนผู้ได้รับสิทธิทั่วประเทศ</div>
+                            </div>
+                            <div class="p-5 bg-blue-50 rounded-2xl border border-blue-100 group hover:bg-blue-600 hover:text-white transition-all cursor-default">
+                                <div class="font-black text-blue-800 group-hover:text-white mb-1 text-sm">2) สหกรณ์หมู่บ้าน</div>
+                                <div class="text-[11px] opacity-80 leading-snug font-medium">เป้าก่อสร้าง 30,000 แห่ง ยกระดับรายได้ภาคเกษตร</div>
+                            </div>
+                            <div class="p-5 bg-blue-50 rounded-2xl border border-blue-100 group hover:bg-blue-600 hover:text-white transition-all cursor-default">
+                                <div class="font-black text-blue-800 group-hover:text-white mb-1 text-sm">3) Danantara Fund</div>
+                                <div class="text-[11px] opacity-80 leading-snug font-medium">ลงทุน $26,000 ล้าน ในโครงการ Downstream แร่และพลังงาน</div>
+                            </div>
+                            <div class="p-5 bg-blue-50 rounded-2xl border border-blue-100 group hover:bg-blue-600 hover:text-white transition-all cursor-default">
+                                <div class="font-black text-blue-800 group-hover:text-white mb-1 text-sm">4) ความมั่นคงอาหาร</div>
+                                <div class="text-[11px] opacity-80 leading-snug font-medium">เสริมศักยภาพการผลิตข้าวเพื่อลดการนำเข้าและคุมเงินเฟ้อ</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-900 text-white p-8 rounded-3xl flex flex-col justify-between shadow-xl">
+                        <div>
+                            <div class="text-[10px] font-black uppercase text-blue-400 mb-4 tracking-widest">Market Insight</div>
+                            <p class="text-xs leading-relaxed font-medium opacity-90">
+                                ความสำเร็จของ Danantara และโครงการอาหารกลางวันจะเป็นบทพิสูจน์สำคัญต่อเสถียรภาพทางการคลัง ท่ามกลางการเฝ้าระวังอันดับเครดิตจาก Moody's และ MSCI
+                            </p>
+                        </div>
+                        <div class="mt-8 pt-6 border-t border-slate-800">
+                            <div class="text-3xl font-black text-blue-400 tracking-tighter">5.5 - 6.0%</div>
+                            <div class="text-[10px] font-bold opacity-50 uppercase">GDP Target 1Q26</div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
+
+            <!-- Malaysia Detailed -->
+            <div class="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-sm border border-slate-200 overflow-hidden relative">
+                <div class="flex items-center gap-4 mb-8">
+                    <span class="text-4xl">🇲🇾</span>
+                    <div>
+                        <h3 class="text-2xl font-black text-purple-800">Malaysia: Accelerating Growth, Advancing Malaysia</h3>
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">13th Malaysia Plan (13MP)</p>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <p class="text-sm text-slate-600 leading-relaxed font-medium">
+                        นายกฯ Anwar Ibrahim ย้ำยุทธศาสตร์ <strong>"Execution over Announcement"</strong> เน้นการปฏิรูปเชิงสถาบันและ Zero Tolerance for Corruption เพื่อดึงดูดการลงทุนมูลค่าสูง
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+                        <div class="p-6 bg-purple-50 rounded-3xl border border-purple-100 hover:bg-purple-100 transition-colors">
+                            <div class="text-purple-600 mb-3 flex justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 21h6l-.75-4M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <div class="font-black text-slate-800 text-xs mb-1">AI Nation 2030</div>
+                            <div class="text-[10px] text-slate-500 font-medium leading-tight">ยกระดับอุตสาหกรรมเซมิคอนดักเตอร์สู่ฐานมูลค่าสูง</div>
+                        </div>
+                        <div class="p-6 bg-purple-50 rounded-3xl border border-purple-100 hover:bg-purple-100 transition-colors">
+                            <div class="text-purple-600 mb-3 flex justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                            <div class="font-black text-slate-800 text-xs mb-1">Net-zero 2050</div>
+                            <div class="text-[10px] text-slate-500 font-medium leading-tight">เร่งโรดแมปพลังงานหมุนเวียนและเศรษฐกิจสีเขียว</div>
+                        </div>
+                        <div class="p-6 bg-purple-50 rounded-3xl border border-purple-100 hover:bg-purple-100 transition-colors">
+                            <div class="text-purple-600 mb-3 flex justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                </svg>
+                            </div>
+                            <div class="font-black text-slate-800 text-xs mb-1">Healthcare RESET</div>
+                            <div class="text-[10px] text-slate-500 font-medium leading-tight">ปฏิรูประบบสาธารณสุขผ่าน National Health Fund</div>
+                        </div>
+                        <div class="p-6 bg-purple-50 rounded-3xl border border-purple-100 hover:bg-purple-100 transition-colors">
+                            <div class="text-purple-600 mb-3 flex justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                </svg>
+                            </div>
+                            <div class="font-black text-slate-800 text-xs mb-1">SMEs Resilience</div>
+                            <div class="text-[10px] text-slate-500 font-medium leading-tight">ยกระดับศักยภาพเพื่อรองรับความเสี่ยงการค้าโลก</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thailand Detailed -->
+            <div class="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-sm border border-slate-200 overflow-hidden relative">
+                <div class="flex items-center gap-4 mb-8">
+                    <span class="text-4xl">🇹🇭</span>
+                    <div>
+                        <h3 class="text-2xl font-black text-orange-800 uppercase">Thailand Election: 8 Feb 2026</h3>
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">General Election Results</p>
+                    </div>
+                </div>
+                <div class="flex flex-col lg:flex-row gap-12">
+                    <div class="flex-1 space-y-6">
+                        <p class="text-sm text-slate-600 leading-relaxed font-semibold underline decoration-orange-100 decoration-4">
+                            พรรคภูมิใจไทยเป็นแกนนำจัดตั้งรัฐบาลร่วมกับพรรคเพื่อไทย โดยตลาดตอบรับเชิงบวกต่อเสถียรภาพและแนวทางนโยบายเศรษฐกิจของว่าที่ รมว.คลัง (นายเอกนิติ)
+                        </p>
+                        <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200">
+                            <div class="text-[10px] font-black text-slate-400 uppercase mb-6 tracking-widest">Seat Distribution (500 Seats)</div>
+                            <div class="flex items-end gap-3 h-24 mb-4">
+                                <!-- ภท -->
+                                <div class="flex-1 bg-blue-600 rounded-t-xl relative group" style="height: 100%;">
+                                    <div class="absolute -top-7 left-0 right-0 text-center font-black text-blue-800 text-[10px]">ภท. 193</div>
+                                    <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-t-xl"></div>
+                                </div>
+                                <!-- ปชน -->
+                                <div class="flex-1 bg-orange-500 rounded-t-xl relative group" style="height: 61%;">
+                                    <div class="absolute -top-7 left-0 right-0 text-center font-black text-orange-700 text-[10px]">ปชน. 118</div>
+                                    <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-t-xl"></div>
+                                </div>
+                                <!-- พท -->
+                                <div class="flex-1 bg-red-500 rounded-t-xl relative group" style="height: 38%;">
+                                    <div class="absolute -top-7 left-0 right-0 text-center font-black text-red-700 text-[10px]">พท. 74</div>
+                                    <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-t-xl"></div>
+                                </div>
+                                <!-- กธ -->
+                                <div class="flex-1 bg-slate-400 rounded-t-xl relative group" style="height: 30%;">
+                                    <div class="absolute -top-7 left-0 right-0 text-center font-black text-slate-700 text-[10px]">กธ. 58</div>
+                                    <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity rounded-t-xl"></div>
+                                </div>
+                            </div>
+                            <p class="text-[10px] text-slate-400 font-bold text-center mt-6 uppercase tracking-wider">Coalition Forming Target: Mar - Apr 2026</p>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/3 bg-orange-50 p-8 rounded-[2rem] border border-orange-100 flex flex-col justify-between shadow-inner">
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-2 text-orange-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                </svg>
+                                <h4 class="font-black text-slate-800 text-sm uppercase tracking-tight italic">Economic Agenda</h4>
+                            </div>
+                            <ul class="text-[11px] space-y-3 text-slate-700 font-black leading-relaxed">
+                                <li class="flex gap-2 underline decoration-orange-200 decoration-2 underline-offset-2">
+                                    <span>• รักษาวินัยการคลังและบริหารหนี้สาธารณะ</span>
+                                </li>
+                                <li class="flex gap-2 underline decoration-orange-200 decoration-2 underline-offset-2">
+                                    <span>• ลงทุนโครงสร้างพื้นฐานที่มี Multiplier สูง</span>
+                                </li>
+                                <li class="flex gap-2 underline decoration-orange-200 decoration-2 underline-offset-2">
+                                    <span>• ปฏิรูปภาษีเพื่อขยายฐานรายได้ของรัฐ</span>
+                                </li>
+                                <li class="flex gap-2 underline decoration-orange-200 decoration-2 underline-offset-2">
+                                    <span>• อุตสาหกรรมเป้าหมาย/เศรษฐกิจดิจิทัล</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="text-[10px] text-orange-700 font-black text-center pt-6 border-t border-orange-200 mt-6 uppercase tracking-widest">
+                            Policy Stability: High
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        {/* ฟุตเตอร์ */}
-        <footer className="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center text-slate-400 text-xs gap-4 italic pb-10 uppercase tracking-widest font-bold">
-          <p>© 2026 ASEAN Economic Research Unit. จัดทำเพื่อการวิเคราะห์ทางวิชาการ</p>
-          <div className="flex gap-6">
-            <span className="text-slate-300">Data Source: Bloomberg, IMF, World Bank</span>
-          </div>
+        <!-- Footer -->
+        <footer class="pt-10 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center text-slate-400 text-[10px] gap-6 italic pb-10 uppercase tracking-[0.2em] font-black">
+            <p>© 2026 ASEAN Economic Research Unit. FOR EDUCATIONAL PURPOSES ONLY.</p>
+            <div class="flex gap-8">
+                <span class="text-slate-300">Data: Bloomberg Terminal, IMF Monitor</span>
+            </div>
         </footer>
 
-      </div>
     </div>
-  );
-};
 
-export default App;
+    <script>
+        // Initialization of GDP Chart using Chart.js
+        window.onload = function() {
+            const ctx = document.getElementById('gdpChart').getContext('2d');
+            const gdpData = {
+                labels: ['อินโดนีเซีย', 'มาเลเซีย', 'ฟิลิปปินส์', 'สิงคโปร์', 'เวียดนาม', 'ไทย'],
+                datasets: [{
+                    label: 'GDP Growth 4Q2025 (%)',
+                    data: [5.39, 6.30, 3.00, 6.90, 8.46, 2.50],
+                    backgroundColor: [
+                        '#0064FF', // ID
+                        '#9E50CC', // MY
+                        '#EF3C67', // PH
+                        '#61D09C', // SG
+                        '#059669', // VN
+                        '#FF6600'  // TH
+                    ],
+                    borderRadius: 8,
+                    barThickness: 50,
+                }]
+            };
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: gdpData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: '#1e293b',
+                            padding: 12,
+                            titleFont: { size: 14, family: 'Sarabun' },
+                            bodyFont: { size: 13, family: 'Sarabun' },
+                            cornerRadius: 8,
+                            displayColors: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.parsed.y + '% YoY';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#f1f5f9',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#64748b',
+                                font: { size: 11, family: 'Sarabun' },
+                                callback: function(value) { return value + '%'; }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#1e293b',
+                                font: { size: 12, family: 'Sarabun', weight: 'bold' }
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
