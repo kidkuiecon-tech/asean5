@@ -1,221 +1,395 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ยุทธศาสตร์เศรษฐกิจไทย: 3% Plus</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Sarabun', sans-serif;
-            background-color: #f8fafc;
-        }
-        .policy-card {
-            transition: transform 0.2s ease-in-out, shadow 0.2s ease-in-out;
-        }
-        .policy-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-    </style>
-</head>
-<body class="p-4 md:p-8">
+import React from 'react';
+import { 
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell 
+} from 'recharts';
+import { 
+  TrendingUp, 
+  Globe, 
+  Wallet, 
+  Activity, 
+  Info, 
+  PieChart, 
+  Vote, 
+  Cpu, 
+  Briefcase,
+  FileText,
+  Search
+} from 'lucide-react';
 
-    <!-- Header Section -->
-    <header class="max-w-5xl mx-auto mb-10 text-center">
-        <div class="inline-block px-4 py-1 rounded-full text-white text-xs font-bold mb-4" style="background-color: #0064FF;">
-            POLICY INSIGHT 2025-2027
-        </div>
-        <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
-            ยุทธศาสตร์เศรษฐกิจไทย: <span style="color: #0064FF;">3% Plus</span>
-        </h1>
-        <p class="text-gray-600 max-w-2xl mx-auto">
-            วิเคราะห์เจาะลึก "คุมคลังเบ็ดเสร็จ" ปลดล็อกคอขวดโครงสร้าง และกลไกการขับเคลื่อน GDP ผ่านความเชื่อมั่นและการลงทุน
-        </p>
-    </header>
+const App = () => {
+  // ข้อมูล GDP ประจำไตรมาส 4 ปี 2025 และการคาดการณ์ปี 2026 ตามตารางที่ระบุ
+  const gdpData = [
+    { name: 'อินโดนีเซีย', q4: 5.39, annual: 5.11, forecast: 5.10, color: '#0064FF' },
+    { name: 'มาเลเซีย', q4: 6.30, annual: 5.20, forecast: 4.30, color: '#9E50CC' },
+    { name: 'ฟิลิปปินส์', q4: 3.00, annual: 4.40, forecast: 5.60, color: '#EF3C67' },
+    { name: 'สิงคโปร์', q4: 6.90, annual: 5.00, forecast: 1.80, color: '#61D09C' },
+    { name: 'เวียดนาม', q4: 8.46, annual: 8.02, forecast: 5.60, color: '#059669' },
+    { name: 'ไทย', q4: 2.50, annual: 2.40, forecast: 1.60, color: '#FF6600' },
+  ];
 
-    <!-- Hero Stats Grid -->
-    <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center">
-            <span class="text-gray-400 text-xs font-bold uppercase mb-1">เป้าหมายระดมลงทุน</span>
-            <span class="text-3xl font-black" style="color: #0064FF;">1.1 ล้านล้าน</span>
-            <span class="text-gray-500 text-xs mt-1">เร่งเม็ดเงิน "ลงดิน" (Capex)</span>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center">
-            <span class="text-gray-400 text-xs font-bold uppercase mb-1">GDP North Star</span>
-            <span class="text-3xl font-black" style="color: #61D09C;">3% +</span>
-            <span class="text-gray-500 text-xs mt-1">ยกระดับจากค่ากลางที่ 2%</span>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center">
-            <span class="text-gray-400 text-xs font-bold uppercase mb-1">วินัยการคลัง</span>
-            <span class="text-3xl font-black" style="color: #EF3C67;">&lt; 70%</span>
-            <span class="text-gray-500 text-xs mt-1">Public Debt to GDP Ceiling</span>
-        </div>
+  return (
+    <div className="min-h-screen bg-slate-50 text-slate-900 p-4 md:p-8 font-sans">
+      <div className="max-w-6xl mx-auto space-y-10">
+        
+        {/* หัวข้อรายงาน */}
+        <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b-2 pb-6 border-blue-700">
+          <div>
+            <h1 className="text-4xl font-extrabold text-blue-800 flex items-center gap-3 tracking-tight">
+              <Globe className="w-10 h-10" />
+              ASEAN Monthly Review
+            </h1>
+            <p className="text-slate-500 font-bold mt-1 uppercase tracking-wider">Economic Analysis & Strategic Outlook • February 2026</p>
+          </div>
+          <div className="bg-blue-50 px-6 py-2 rounded-lg border border-blue-100 text-right">
+            <div className="text-sm font-bold text-blue-700 uppercase">Report Status</div>
+            <div className="text-lg font-black text-blue-900">กุมภาพันธ์ 2569</div>
+          </div>
+        </header>
+
+        {/* บทสรุปผู้บริหาร */}
+        <section className="bg-white rounded-2xl p-8 border-l-8 border-blue-600 shadow-sm space-y-4">
+          <h2 className="text-xl font-bold flex items-center gap-2 text-blue-800 uppercase">
+            <Info className="w-5 h-5" /> Executive Summary
+          </h2>
+          <div className="text-lg md:text-xl text-slate-700 leading-relaxed font-medium">
+            GDP ของอาเซียนในไตรมาส 4 ปี 2025 รวมสะท้อนให้เห็นถึง 
+            <span className="text-blue-700 font-bold"> “ความแตกต่างของแรงขับเคลื่อน” </span> 
+            ระหว่างประเทศที่พึ่งพาการบริโภคภายใน กับประเทศที่ได้อานิสงส์จากวัฏจักรเทคโนโลยีและการค้าโลก
+          </div>
+        </section>
+
+        {/* รายละเอียด GDP รายประเทศ */}
+        <section className="space-y-6">
+          <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-2 border-b pb-2">
+            <Activity className="w-6 h-6 text-red-600" /> รายละเอียดภาวะเศรษฐกิจรายประเทศ
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              { title: "1) อินโดนีเซีย", content: "เศรษฐกิจไตรมาส 4/2025 ขยายตัว 5.39% YoY เร่งขึ้นจาก 5.04% ในไตรมาส 3 สูงสุดนับตั้งแต่ 3Q2022 แรงหนุนหลักจากการบริโภคภาคเอกชน (5.11%) ตามมาตรการภาครัฐและการลดดอกเบี้ย แม้การส่งออกจะชะลอตัวลง ปี 2025 โต 5.11% (สูงขึ้นจาก 5.03%)" },
+              { title: "2) มาเลเซีย", content: "ขยายตัว 6.3% YoY เร่งตัวสูงสุดนับตั้งแต่ปลายปี 2022 เติบโตเป็นวงกว้างทั้งเกษตร (น้ำมันปาล์ม) ผลิต และบริการ การบริโภคครัวเรือนและการลงทุนขยายตัวต่อเนื่อง แม้ดุลการค้าจะถูกกดดันจากการนำเข้าที่เร่งขึ้น ปี 2025 โต 5.2%" },
+              { title: "3) ฟิลิปปินส์", content: "ขยายตัวเพียง 3.0% YoY ชะลอลงและต่ำกว่าคาด กดดันจากภาครัฐที่ใช้จ่ายลดลงและการลงทุนหดตัวครั้งแรกในรอบกว่าปี แต่ได้ภาคส่งออกช่วยพยุงภาพรวม ทั้งปี 2025 โต 4.4% ชะลอจาก 5.6% ในปี 2024" },
+              { title: "4) สิงคโปร์", content: "ขยายตัว 6.9% YoY สูงสุดตั้งแต่ปี 2021 ได้อานิสงส์หลักจากภาคผลิตอิเล็กทรอนิกส์ที่เกี่ยวกับ AI รวมถึงค้าส่งและการเงิน ทั้งปี 2025 โต 5.0% ชะลอเล็กน้อยจาก 5.3% ในปีก่อนหน้า" },
+              { title: "5) เวียดนาม", content: "ขยายตัวโดดเด่นถึง 8.46% YoY สูงสุดตั้งแต่ปี 2007 เติบโตแข็งแกร่งทุกส่วน โดยเฉพาะอุตสาหกรรม/ก่อสร้าง (9.73%) การส่งออก/นำเข้าพุ่งกว่า 19% แม้เผชิญกำแพงภาษี ทั้งปี 2025 โต 8.02% สูงสุดตั้งแต่ปี 2011" },
+              { title: "6) ประเทศไทย", content: "ขยายตัว 2.5% YoY ฟื้นตัวจากจุดต่ำสุดในรอบ 4 ปี แรงหนุนจากการบริโภคเอกชน (3.3%) และการลงทุนที่ฟื้นชัดเจน (8.1%) แต่ยังตามหลังเพื่อนบ้าน ทั้งปี 2025 โต 2.4% ปี 2026 คาดการณ์กรอบ 1.5% - 2.5%" }
+            ].map((item, idx) => (
+              <div key={idx} className="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:border-blue-300 transition-all">
+                <h3 className="font-bold text-lg text-blue-700 mb-2">{item.title}</h3>
+                <p className="text-sm text-slate-600 leading-relaxed">{item.content}</p>
+              </div>
+            ))}
+          </div>
+          <div className="bg-slate-100 p-4 rounded-lg text-sm text-slate-700 italic border-l-4 border-slate-400">
+            สรุปภาพรวมรายปี 2025: เวียดนาม (8.02%) นำโด่ง ตามด้วยมาเลเซีย (5.2%), อินโดนีเซีย (5.11%), สิงคโปร์ (5.0%), ฟิลิปปินส์ (4.4%) และไทย (2.4%)
+          </div>
+        </section>
+
+        {/* กราฟและตาราง GDP */}
+        <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          <div className="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+            <h3 className="text-lg font-bold mb-6 flex items-center gap-2 text-slate-800 uppercase tracking-tight">
+              <PieChart className="w-5 h-5 text-blue-600" /> 
+              ASEAN GDP Visualization (% YoY)
+            </h3>
+            <div className="h-80 w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={gdpData} margin={{ top: 10, right: 30, left: 0, bottom: 20 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#475569', fontSize: 12}} dy={10} />
+                  <YAxis axisLine={false} tickLine={false} tick={{fill: '#475569', fontSize: 12}} />
+                  <Tooltip 
+                    cursor={{fill: '#f8fafc'}} 
+                    contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
+                  />
+                  <Bar dataKey="q4" name="4Q2025 (%)" radius={[4, 4, 0, 0]} barSize={45}>
+                    {gdpData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div className="bg-blue-700 text-white p-4 font-bold text-center uppercase tracking-widest text-sm">
+              GDP Data Table
+            </div>
+            <table className="w-full text-sm border-collapse">
+              <thead className="bg-slate-50 text-[10px] text-slate-500 font-black uppercase">
+                <tr>
+                  <th className="p-3 text-left border-b">ประเทศ</th>
+                  <th className="p-3 text-center border-b">4Q25</th>
+                  <th className="p-3 text-center border-b">2025</th>
+                  <th className="p-3 text-center border-b">2026(f)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {gdpData.map((row, idx) => (
+                  <tr key={idx} className="hover:bg-slate-50 border-b border-slate-100 transition-colors">
+                    <td className="p-3 font-bold text-slate-700">{row.name}</td>
+                    <td className="p-3 text-center text-blue-600 font-bold">{row.q4.toFixed(2)}%</td>
+                    <td className="p-3 text-center text-slate-600">{row.annual.toFixed(2)}%</td>
+                    <td className="p-3 text-center text-slate-400 italic">{row.forecast.toFixed(2)}%</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="p-3 text-[10px] text-slate-400 italic bg-slate-50">ที่มา: Bloomberg</div>
+          </div>
+        </section>
+
+        {/* นโยบายการเงิน */}
+        <section className="space-y-6">
+          <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-2 border-b pb-2">
+            <Wallet className="w-6 h-6 text-indigo-600" /> ทิศทางนโยบายการเงิน
+          </h2>
+          <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+            <p className="mb-6 text-slate-600 leading-relaxed font-medium">
+              สะท้อนภาพ <span className="text-indigo-700 font-bold">“จังหวะที่แตกต่างกัน”</span> ระหว่างประเทศที่เข้าสู่วัฏจักรผ่อนคลายชัดเจน กับประเทศที่เลือกคงดอกเบี้ยเพื่อประเมินสถานการณ์และเสถียรภาพค่าเงิน
+            </p>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="space-y-4">
+                {[
+                  { bank: "อินโดนีเซีย (BI)", rate: "4.75%", desc: "คงดอกเบี้ยต่อเนื่องครั้งที่ 5 เพื่อรักษาเสถียรภาพรูเปียห์ท่ามกลางความผันผวนโลก" },
+                  { bank: "ฟิลิปปินส์ (BSP)", rate: "4.25%", desc: "ผ่อนคลายเชิงรุก ลดดอกเบี้ย 25 bps เพื่อพยุงเศรษฐกิจที่ชะลอตัวเหลือราว 3%" },
+                  { bank: "มาเลเซีย (BNM)", rate: "2.75%", desc: "คงดอกเบี้ยเป็นครั้งที่ 3 จากเงินเฟ้อต่ำและเศรษฐกิจขยายตัวได้ดี" }
+                ].map((item, i) => (
+                  <div key={i} className="flex justify-between items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100">
+                    <div className="flex-1">
+                      <div className="font-bold text-slate-800 underline decoration-indigo-200 decoration-4 underline-offset-2">{item.bank}</div>
+                      <div className="text-xs text-slate-500 mt-1">{item.desc}</div>
+                    </div>
+                    <div className="text-lg font-black text-indigo-700 whitespace-nowrap">{item.rate}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="space-y-4">
+                {[
+                  { bank: "ประเทศไทย (ธปท.)", rate: "1.25%", desc: "คงดอกเบี้ยต่อเนื่อง รอดูข้อมูลเพิ่มเติม ท่าทีเป็นกลางค่อนไปทางผ่อนคลาย" },
+                  { bank: "เวียดนาม (SBV)", rate: "4.50%", desc: "คงอัตราดอกเบี้ยระดับผ่อนคลายเพื่อสนับสนุนการเติบโตและดูแลค่าเงิน" }
+                ].map((item, i) => (
+                  <div key={i} className="flex justify-between items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100">
+                    <div className="flex-1">
+                      <div className="font-bold text-slate-800 underline decoration-indigo-200 decoration-4 underline-offset-2">{item.bank}</div>
+                      <div className="text-xs text-slate-500 mt-1">{item.desc}</div>
+                    </div>
+                    <div className="text-lg font-black text-indigo-700 whitespace-nowrap">{item.rate}</div>
+                  </div>
+                ))}
+                <div className="p-4 rounded-xl bg-indigo-900 text-white text-sm font-medium">
+                  ทิศทางครึ่งปีแรกจะขึ้นกับ: โมเมนตัมการเติบโต, เสถียรภาพค่าเงิน และพัฒนาการเงินเฟ้อของแต่ละประเทศ
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* เครื่องชี้เศรษฐกิจรายเดือน */}
+        <section className="space-y-6">
+          <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-2 border-b pb-2">
+            <Search className="w-6 h-6 text-blue-600" /> เครื่องชี้เศรษฐกิจรายเดือน (Key Indicators)
+          </h2>
+          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden overflow-x-auto">
+            <table className="w-full text-left border-collapse min-w-[800px]">
+              <thead className="bg-blue-800 text-white uppercase text-xs font-bold tracking-widest">
+                <tr>
+                  <th className="p-5 border-r border-blue-700 w-48">ประเทศ</th>
+                  <th className="p-5">เครื่องชี้วัดที่สำคัญ</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-200">
+                {[
+                  {
+                    country: "อินโดนีเซีย",
+                    data: [
+                      "Manufacturing PMI: 52.6 (ขยายตัวเดือนที่ 6 จากอุปสงค์ในประเทศ)",
+                      "ยอดขายรถจักรยานยนต์: 577,763 คัน (+25.08% MoM) หนุนโดยดอกเบี้ยขาลง",
+                      "เงินเฟ้อ: +3.55% YoY (Core 2.45%) หมวดที่อยู่อาศัยพุ่งจากฐานค่าไฟต่ำ",
+                      "ดัชนีเชื่อมั่นผู้บริโภค: 127.0 สูงสุดตั้งแต่ ม.ค. 2025"
+                    ]
+                  },
+                  {
+                    country: "มาเลเซีย",
+                    data: [
+                      "Manufacturing PMI: 50.2 สูงสุดตั้งแต่ พ.ค. 2024 จาก Output ฟื้นตัว",
+                      "ยอดขายรถ: 64,298 คัน (EV 7,687 คัน) ชะลอลงหลังจากฐานสูงเดือนก่อน",
+                      "เงินเฟ้อ: +1.6% YoY (Core 2.3%) ทรงตัวในระดับต่ำ"
+                    ]
+                  },
+                  {
+                    country: "ฟิลิปปินส์",
+                    data: [
+                      "Manufacturing PMI: 52.9 สูงสุดตั้งแต่ เม.ย. 2025 คำสั่งซื้อใหม่ฟื้นชัดเจน",
+                      "ยอดขายรถ (ธ.ค.): 8,009 คัน เพิ่มขึ้นต่อเนื่องสะท้อนอุปสงค์แกร่ง",
+                      "เงินเฟ้อ: +2.0% YoY (Core 2.8% สูงสุดรอบ 7 เดือน) จากหมวดสาธารณูปโภค"
+                    ]
+                  },
+                  {
+                    country: "ประเทศไทย",
+                    data: [
+                      "Manufacturing PMI: 52.7 ชะลอจากจุดสูงสุดเดิมเนื่องจากส่งออกอ่อนแรง",
+                      "การผลิตรถ: 113,855 คัน / ยอดขายในประเทศ +39.07% YoY (แรงหนุน EV 3.0)",
+                      "เงินเฟ้อ: -0.66% YoY ติดลบต่อเนื่องเดือนที่ 10 จากราคาพลังงาน",
+                      "ดัชนีเชื่อมั่นธุรกิจ: 49.1 ต่ำสุดตั้งแต่ ต.ค. / ความเชื่อมั่นผู้บริโภค: 52.8 ฟื้นจากส่งออกและรัฐบาลใหม่"
+                    ]
+                  },
+                  {
+                    country: "เวียดนาม",
+                    data: [
+                      "Manufacturing PMI: 52.5 ขยายตัวเดือนที่ 7 / มุมมอง 12 เดือนข้างหน้าดีสุดรอบปี",
+                      "การผลิตภาคอุตสาหกรรม: +21.5% YoY เร่งตัวแรงจากปัจจัยฤดูกาลก่อนตรุษญวน",
+                      "ยอดค้าปลีก: +9.3% YoY / เงินเฟ้อ: +2.53% YoY ต่ำสุดนับตั้งแต่ ก.ค. 2023"
+                    ]
+                  }
+                ].map((row, idx) => (
+                  <tr key={idx} className="hover:bg-blue-50/30 transition-colors group">
+                    <td className="p-6 font-bold text-blue-800 align-top border-r border-slate-100 group-hover:bg-blue-50">{row.country}</td>
+                    <td className="p-6">
+                      <ul className="space-y-2">
+                        {row.data.map((item, i) => (
+                          <li key={i} className="flex gap-2 text-sm text-slate-600">
+                            <span className="text-blue-500 font-bold">•</span> {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* ข่าวเด่นรายประเทศ */}
+        <section className="space-y-6 pb-20">
+          <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-2 border-b pb-2">
+            <FileText className="w-6 h-6 text-slate-600" /> ความเคลื่อนไหวรายประเทศที่น่าสนใจ
+          </h2>
+          
+          <div className="space-y-8">
+            {/* อินโดนีเซีย */}
+            <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-3xl">🇮🇩</span>
+                <h3 className="text-xl font-bold text-blue-700 uppercase">Indonesia Economic Outlook 2026</h3>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="md:col-span-2 space-y-4">
+                  <p className="text-sm text-slate-600 leading-relaxed italic">
+                    ประธานาธิบดี Prabowo ตั้งเป้า GDP โตใกล้ 6% โดยกระทรวงการคลังกำหนดเป้าไตรมาส 1/2026 ไว้ที่ 5.5%–6.0% แรงสนับสนุนหลักมาจากนโยบายการคลังเชิงขยายตัว
+                  </p>
+                  <div className="font-bold text-slate-800 text-sm">4 เสาหลักการขับเคลื่อน:</div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {[
+                      { t: "1) อาหารกลางวันฟรี", c: "ขยายจำนวนผู้รับสิทธิและงบประมาณ" },
+                      { t: "2) สหกรณ์หมู่บ้าน", c: "สร้างกว่า 30,000 แห่ง ยกระดับเกษตร" },
+                      { t: "3) Danantara Fund", c: "ลงทุน Downstream $26,000 ล้าน" },
+                      { t: "4) ความมั่นคงอาหาร", c: "ผลผลิตข้าวปรับตัวเพิ่มขึ้นนัยสำคัญ" }
+                    ].map((pill, i) => (
+                      <div key={i} className="p-3 bg-blue-50 rounded-lg text-xs">
+                        <div className="font-bold text-blue-700 mb-1">{pill.t}</div>
+                        <div className="text-slate-500">{pill.c}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="bg-slate-50 p-6 rounded-xl border border-slate-100 flex flex-col justify-center">
+                  <div className="text-[10px] uppercase font-bold text-slate-400 mb-2">Market Insight</div>
+                  <p className="text-xs text-slate-500 leading-relaxed">
+                    ความสำเร็จของการปฏิรูปโครงสร้างจะเป็นปัจจัยสำคัญต่อการฟื้นความเชื่อมั่น ท่ามกลางความเป็นไปได้ที่จะถูกปรับลดอันดับหุ้นจาก MSCI และความน่าเชื่อถือพันธบัตรจาก Moody's
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* มาเลเซีย */}
+            <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-3xl">🇲🇾</span>
+                <h3 className="text-xl font-bold text-purple-700 uppercase">Malaysia: Accelerating Growth, Advancing Malaysia</h3>
+              </div>
+              <p className="text-sm text-slate-600 leading-relaxed mb-6">
+                นายกฯ Anwar Ibrahim เน้นย้ำยุทธศาสตร์ "Execution over Announcement" ภายใต้แผนพัฒนาเศรษฐกิจฉบับที่ 13 (13MP) ยึดหลักธรรมาภิบาลและ Zero Tolerance for Corruption
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {[
+                  { icon: <Cpu className="w-5 h-5"/>, h: "AI Nation 2030", d: "ยกระดับเซมิคอนดักเตอร์และเศรษฐกิจดิจิทัล" },
+                  { icon: <TrendingUp className="w-5 h-5"/>, h: "Net-zero 2050", d: "เร่งโรดแมปพลังงานหมุนเวียน" },
+                  { icon: <Activity className="w-5 h-5"/>, h: "Healthcare RESET", d: "ปฏิรูประบบสาธารณสุขผ่าน National Health Fund" },
+                  { icon: <Briefcase className="w-5 h-5"/>, h: "Fiscal Reform", d: "สร้างพื้นที่ทางการคลังและรักษาเสถียรภาพราคา" }
+                ].map((item, i) => (
+                  <div key={i} className="p-4 bg-purple-50 rounded-xl border border-purple-100">
+                    <div className="text-purple-600 mb-2">{item.icon}</div>
+                    <div className="font-bold text-slate-800 text-sm mb-1">{item.h}</div>
+                    <div className="text-[11px] text-slate-500">{item.d}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* ประเทศไทย */}
+            <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-200">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-3xl">🇹🇭</span>
+                <h3 className="text-xl font-bold text-orange-700 uppercase">Thailand Election Report: 8 ก.พ. 2569</h3>
+              </div>
+              <div className="flex flex-col lg:flex-row gap-8">
+                <div className="flex-1 space-y-4">
+                  <p className="text-sm text-slate-600 leading-relaxed font-medium">
+                    พรรคภูมิใจไทยเป็นแกนนำจัดตั้งรัฐบาลร่วมกับพรรคเพื่อไทย โดยมีเป้าหมายจัดตั้งรัฐบาลให้เสร็จสิ้นภายใน มี.ค.-เม.ย. เพื่อไม่ให้กระทบงบประมาณ
+                  </p>
+                  <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <div className="text-xs font-bold text-slate-400 uppercase mb-3">สรุปจำนวนที่นั่งในสภา (500 ที่นั่ง)</div>
+                    <div className="flex items-end gap-2 h-20">
+                      <div className="flex-1 bg-blue-600 rounded-t-lg relative" style={{height: '90%'}}>
+                        <span className="absolute -top-6 left-0 right-0 text-center font-bold text-blue-800 text-xs">ภท. 193</span>
+                      </div>
+                      <div className="flex-1 bg-orange-500 rounded-t-lg relative" style={{height: '60%'}}>
+                        <span className="absolute -top-6 left-0 right-0 text-center font-bold text-orange-700 text-xs">ปชน. 118</span>
+                      </div>
+                      <div className="flex-1 bg-red-500 rounded-t-lg relative" style={{height: '40%'}}>
+                        <span className="absolute -top-6 left-0 right-0 text-center font-bold text-red-700 text-xs">พท. 74</span>
+                      </div>
+                      <div className="flex-1 bg-slate-400 rounded-t-lg relative" style={{height: '30%'}}>
+                        <span className="absolute -top-6 left-0 right-0 text-center font-bold text-slate-700 text-xs">กธ. 58</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="lg:w-1/3 bg-orange-50 p-6 rounded-2xl border border-orange-100 space-y-4">
+                  <div className="flex items-center gap-2">
+                    <Vote className="text-orange-600 w-5 h-5" />
+                    <h4 className="font-bold text-slate-800 text-sm uppercase italic">Economic Agenda</h4>
+                  </div>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    ว่าที่ รมว.คลัง (นายเอกนิติ) เน้นยุทธศาสตร์:
+                  </p>
+                  <ul className="text-[11px] space-y-2 text-slate-700 font-bold">
+                    <li>• รักษาวินัยการคลังและบริหารหนี้สาธารณะอย่างรอบคอบ</li>
+                    <li>• ลงทุนโครงสร้างพื้นฐานที่มีผลคูณเศรษฐกิจสูง</li>
+                    <li>• ปฏิรูปภาษีเพื่อขยายฐานรายได้รัฐ</li>
+                    <li>• ส่งเสริมอุตสาหกรรมเป้าหมายและเศรษฐกิจดิจิทัล</li>
+                  </ul>
+                  <div className="text-[10px] text-orange-700 font-black text-center pt-2 border-t border-orange-200 uppercase">
+                    Execution Target: 1H 2026
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ฟุตเตอร์ */}
+        <footer className="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center text-slate-400 text-xs gap-4 italic pb-10 uppercase tracking-widest font-bold">
+          <p>© 2026 ASEAN Economic Research Unit. จัดทำเพื่อการวิเคราะห์ทางวิชาการ</p>
+          <div className="flex gap-6">
+            <span className="text-slate-300">Data Source: Bloomberg, IMF, World Bank</span>
+          </div>
+        </footer>
+
+      </div>
     </div>
+  );
+};
 
-    <!-- Main Content Grid -->
-    <main class="max-w-5xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
-            
-            <!-- Column 1: Governance & Macro -->
-            <div class="space-y-6">
-                <!-- Governance Card -->
-                <div class="bg-white rounded-xl shadow-sm border-l-4 p-5 policy-card" style="border-left-color: #7A0334;">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="p-2 rounded-lg" style="background-color: rgba(122, 3, 52, 0.1); color: #7A0334;">
-                            <i data-lucide="shield-check"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-lg text-gray-800">Governance: คุมคลังเบ็ดเสร็จ</h3>
-                            <p class="text-xs font-medium uppercase tracking-wider text-[#7A0334]">Delivery Model</p>
-                        </div>
-                    </div>
-                    <ul class="text-gray-600 text-sm space-y-2">
-                        <li>• <strong>War-room Strategy:</strong> รัฐมนตรีคุมเองโดยไม่มี รมช. เพื่อลดการเมืองแทรกแซง</li>
-                        <li>• <strong>Agile Bureaucracy:</strong> ดึงเอกชน/นักวิชาการทลายคอขวดระบบราชการ</li>
-                        <li>• <strong>Quick Big Wins:</strong> เน้นมาตรการสั้นสร้างความเชื่อมั่นพาเศรษฐกิจพ้นหล่ม</li>
-                    </ul>
-                </div>
-
-                <!-- Investment Card -->
-                <div class="bg-white rounded-xl shadow-sm border-l-4 p-5 policy-card" style="border-left-color: #0064FF;">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="p-2 rounded-lg" style="background-color: rgba(0, 100, 255, 0.1); color: #0064FF;">
-                            <i data-lucide="trending-up"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-lg text-gray-800">Investment-led Growth</h3>
-                            <p class="text-xs font-medium uppercase tracking-wider text-[#0064FF]">Execution Focus</p>
-                        </div>
-                    </div>
-                    <ul class="text-gray-600 text-sm space-y-2">
-                        <li>• <strong>From Approval to Action:</strong> ทำให้เงินลงทุน "ลงดิน" จริงในปีเดียว</li>
-                        <li>• <strong>Infrastructure Mix:</strong> ใช้ TFF และ PPP มากขึ้นเพื่อลดภาระงบประมาณ</li>
-                        <li>• <strong>Potential Growth:</strong> เน้นลงทุนที่ยกระดับขีดความสามารถระยะยาว</li>
-                    </ul>
-                </div>
-
-                <!-- Structural Card -->
-                <div class="bg-white rounded-xl shadow-sm border-l-4 p-5 policy-card" style="border-left-color: #EF3C67;">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="p-2 rounded-lg" style="background-color: rgba(239, 60, 103, 0.1); color: #EF3C67;">
-                            <i data-lucide="settings"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-lg text-gray-800">Structural Bottlenecks</h3>
-                            <p class="text-xs font-medium uppercase tracking-wider text-[#EF3C67]">Friction Reduction</p>
-                        </div>
-                    </div>
-                    <ul class="text-gray-600 text-sm space-y-2">
-                        <li>• <strong>Utility Crisis:</strong> แก้ปัญหาไฟฟ้าไม่พอสำหรับ Data Center</li>
-                        <li>• <strong>Permission Economy:</strong> ปรับวีซ่า/ใบอนุญาตผ่าน Digital Work Permit</li>
-                        <li>• <strong>Land & Labor:</strong> เคลียร์อุปสรรคเชิงระบบที่ขัดขวางการขยายฐานผลิต</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Column 2: Reform & Instruments -->
-            <div class="space-y-6 mt-6 lg:mt-0">
-                <!-- 10 Plus Special Section -->
-                <div class="bg-white rounded-xl shadow-sm border-t-4 p-5" style="border-top-color: #FF6600;">
-                    <div class="flex items-center gap-2 mb-4">
-                        <i data-lucide="zap" style="color: #FF6600;"></i>
-                        <h3 class="font-bold text-lg">10 Plus: ยา 10 เม็ดปฏิรูป</h3>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3 mb-2">
-                        <div class="space-y-2">
-                            <h4 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">5 เม็ด: กระจายรายได้</h4>
-                            <div class="bg-orange-50 p-2 rounded text-xs border border-orange-100 font-semibold text-gray-700">1. มนุษย์เงินเดือน Plus</div>
-                            <div class="bg-orange-50 p-2 rounded text-xs border border-orange-100 font-semibold text-gray-700">2. ผู้สูงวัย Plus</div>
-                            <div class="bg-orange-50 p-2 rounded text-xs border border-orange-100 font-semibold text-gray-700">3. SME Made in TH</div>
-                            <div class="bg-orange-50 p-2 rounded text-xs border border-orange-100 font-semibold text-gray-700">4. เศรษฐกิจชุมชน</div>
-                            <div class="bg-orange-50 p-2 rounded text-xs border border-orange-100 font-semibold text-gray-700">5. การศึกษาออนไลน์</div>
-                        </div>
-                        <div class="space-y-2">
-                            <h4 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">5 เม็ด: ขีดแข่งขัน</h4>
-                            <div class="bg-blue-50 p-2 rounded text-xs border border-blue-100 font-semibold text-gray-700">6. การลงทุนใหญ่</div>
-                            <div class="bg-blue-50 p-2 rounded text-xs border border-blue-100 font-semibold text-gray-700">7. Green Economy</div>
-                            <div class="bg-blue-50 p-2 rounded text-xs border border-blue-100 font-semibold text-gray-700">8. AI Transformation</div>
-                            <div class="bg-blue-50 p-2 rounded text-xs border border-blue-100 font-semibold text-gray-700">9. Trade Plus</div>
-                            <div class="bg-blue-50 p-2 rounded text-xs border border-blue-100 font-semibold text-gray-700">10. กฎหมาย TH Plus</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Capital Market Card -->
-                <div class="bg-white rounded-xl shadow-sm border-l-4 p-5 policy-card" style="border-left-color: #9E50CC;">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="p-2 rounded-lg" style="background-color: rgba(158, 80, 204, 0.1); color: #9E50CC;">
-                            <i data-lucide="piggy-bank"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-lg text-gray-800">Capital Market & TISA</h3>
-                            <p class="text-xs font-medium uppercase tracking-wider text-[#9E50CC]">Long-term Savings</p>
-                        </div>
-                    </div>
-                    <ul class="text-gray-600 text-sm space-y-2">
-                        <li>• <strong>TISA replaces LTF:</strong> ออมเพื่อเกษียณ ปรับพอร์ตตามความเสี่ยง</li>
-                        <li>• <strong>Tax Multiplier:</strong> ลดหย่อนภาษีแบบตัวคูณ จูงใจรายได้ปานกลาง</li>
-                        <li>• <strong>Domestic Pool:</strong> เสริมสภาพคล่องและฐานทุนในประเทศ</li>
-                    </ul>
-                </div>
-
-                <!-- Fiscal Rules Card -->
-                <div class="bg-white rounded-xl shadow-sm border-l-4 p-5 policy-card" style="border-left-color: #EF3C67;">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="p-2 rounded-lg" style="background-color: rgba(239, 60, 103, 0.1); color: #EF3C67;">
-                            <i data-lucide="landmark"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-lg text-gray-800">Fiscal Rules & Guardrails</h3>
-                            <p class="text-xs font-medium uppercase tracking-wider text-[#EF3C67]">Stability First</p>
-                        </div>
-                    </div>
-                    <ul class="text-gray-600 text-sm space-y-2">
-                        <li>• <strong>Section 28 Reform:</strong> ห้ามแบงก์รัฐแจกเงินเปล่า ต้องประเมินความคุ้มค่า</li>
-                        <li>• <strong>Debt Ceiling:</strong> คงเพดานหนี้ 70% เพื่อรักษาความน่าเชื่อถือ</li>
-                        <li>• <strong>Budget Timing:</strong> ตั้งรัฐบาลเร็วเพื่อรักษางบปี 70 ไม่ให้สะดุด</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Summary Footer Panel -->
-        <div class="mt-8 p-6 rounded-2xl bg-slate-900 text-white relative overflow-hidden">
-            <div class="relative z-10">
-                <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
-                    <i data-lucide="info" class="text-blue-400"></i>
-                    สรุปทิศทางนโยบาย (Policy Paradigm Shift)
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="border-l-2 border-blue-500 pl-4">
-                        <span class="text-blue-400 text-xs font-bold block mb-1 uppercase">Consumption</span>
-                        <p class="text-sm text-slate-300 italic">"ไม่ใช่แค่แจกเงิน แต่เพิ่มทักษะดิจิทัลให้ร้านค้าเพื่อ multiplier ที่สูงขึ้น"</p>
-                    </div>
-                    <div class="border-l-2 border-green-500 pl-4">
-                        <span class="text-green-400 text-xs font-bold block mb-1 uppercase">Financing</span>
-                        <p class="text-sm text-slate-300 italic">"ลดภาระงบปกติ หันไปใช้ TFF และดึงเอกชนร่วมลงทุน (PPP) มากขึ้น"</p>
-                    </div>
-                    <div class="border-l-2 border-orange-500 pl-4">
-                        <span class="text-orange-400 text-xs font-bold block mb-1 uppercase">Success Factor</span>
-                        <p class="text-sm text-slate-300 italic">"3% Plus จะเป็นไปได้จริงเมื่อแก้ Permission Economy ได้สำเร็จ"</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Decorative blur background -->
-            <div class="absolute top-0 right-0 w-64 h-64 bg-blue-600 rounded-full blur-[100px] opacity-20 -mr-32 -mt-32"></div>
-        </div>
-    </main>
-
-    <footer class="max-w-5xl mx-auto mt-10 pb-10 text-center text-gray-400 text-xs">
-        อ้างอิงข้อมูล: ฐานเศรษฐกิจ, ไทยรัฐ และประชาชาติธุรกิจ (ผ่านระบบสืบค้น) | จัดทำโดยระบบ AI สรุปนโยบายเศรษฐกิจไทย
-    </footer>
-
-    <script>
-        // Initialize Lucide Icons
-        lucide.createIcons();
-    </script>
-</body>
-</html>
+export default App;
